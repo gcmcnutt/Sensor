@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D362848B1B6EA6AF004F9B5B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D36284891B6EA6AF004F9B5B /* Interface.storyboard */; };
 		D38B808E1B69D4E30097D5AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B808D1B69D4E30097D5AC /* AppDelegate.swift */; };
 		D38B80901B69D4E30097D5AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B808F1B69D4E30097D5AC /* ViewController.swift */; };
 		D38B80931B69D4E30097D5AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D38B80911B69D4E30097D5AC /* Main.storyboard */; };
@@ -15,7 +16,6 @@
 		D38B80A31B69D4E30097D5AC /* sensorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B80A21B69D4E30097D5AC /* sensorTests.swift */; };
 		D38B80AE1B69D4E30097D5AC /* sensorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B80AD1B69D4E30097D5AC /* sensorUITests.swift */; };
 		D38B80B31B69D4E40097D5AC /* sensor WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D38B80B21B69D4E40097D5AC /* sensor WatchKit App.app */; };
-		D38B80B91B69D4E40097D5AC /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D38B80B71B69D4E40097D5AC /* Interface.storyboard */; };
 		D38B80BB1B69D4E40097D5AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D38B80BA1B69D4E40097D5AC /* Assets.xcassets */; };
 		D38B80C21B69D4E40097D5AC /* sensor WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D38B80C11B69D4E40097D5AC /* sensor WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D38B80C91B69D4E40097D5AC /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B80C81B69D4E40097D5AC /* InterfaceController.swift */; };
@@ -83,6 +83,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D362848A1B6EA6AF004F9B5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		D38B808A1B69D4E30097D5AC /* sensor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sensor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D38B808D1B69D4E30097D5AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D38B808F1B69D4E30097D5AC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -97,7 +98,6 @@
 		D38B80AD1B69D4E30097D5AC /* sensorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sensorUITests.swift; sourceTree = "<group>"; };
 		D38B80AF1B69D4E30097D5AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D38B80B21B69D4E40097D5AC /* sensor WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sensor WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D38B80B81B69D4E40097D5AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		D38B80BA1B69D4E40097D5AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D38B80BC1B69D4E40097D5AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D38B80C11B69D4E40097D5AC /* sensor WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "sensor WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,7 +201,7 @@
 		D38B80B61B69D4E40097D5AC /* sensor WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
-				D38B80B71B69D4E40097D5AC /* Interface.storyboard */,
+				D36284891B6EA6AF004F9B5B /* Interface.storyboard */,
 				D38B80BA1B69D4E40097D5AC /* Assets.xcassets */,
 				D38B80BC1B69D4E40097D5AC /* Info.plist */,
 			);
@@ -334,6 +334,7 @@
 				TargetAttributes = {
 					D38B80891B69D4E30097D5AC = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = ZFJ4RM7VL4;
 					};
 					D38B809D1B69D4E30097D5AC = {
 						CreatedOnToolsVersion = 7.0;
@@ -345,9 +346,11 @@
 					};
 					D38B80B11B69D4E40097D5AC = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = ZFJ4RM7VL4;
 					};
 					D38B80C01B69D4E40097D5AC = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = ZFJ4RM7VL4;
 					};
 				};
 			};
@@ -402,8 +405,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D362848B1B6EA6AF004F9B5B /* Interface.storyboard in Resources */,
 				D38B80BB1B69D4E40097D5AC /* Assets.xcassets in Resources */,
-				D38B80B91B69D4E40097D5AC /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +484,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		D36284891B6EA6AF004F9B5B /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D362848A1B6EA6AF004F9B5B /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		D38B80911B69D4E30097D5AC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -495,14 +506,6 @@
 				D38B80971B69D4E30097D5AC /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		D38B80B71B69D4E40097D5AC /* Interface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D38B80B81B69D4E40097D5AC /* Base */,
-			);
-			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -595,6 +598,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "sensor WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.accelero.sensor.watchkitapp.watchkitextension;
@@ -610,6 +614,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "sensor WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.accelero.sensor.watchkitapp.watchkitextension;
@@ -625,6 +630,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = sensor_WatchKit_Extension;
 				INFOPLIST_FILE = "sensor WatchKit App/Info.plist";
@@ -641,6 +647,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = sensor_WatchKit_Extension;
 				INFOPLIST_FILE = "sensor WatchKit App/Info.plist";
@@ -657,6 +664,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = sensor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.accelero.sensor;
@@ -668,6 +676,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = sensor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.accelero.sensor;
@@ -742,6 +751,7 @@
 				D38B80D91B69D4E40097D5AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D38B80DB1B69D4E40097D5AC /* Build configuration list for PBXNativeTarget "sensor WatchKit App" */ = {
 			isa = XCConfigurationList;
@@ -750,6 +760,7 @@
 				D38B80DD1B69D4E40097D5AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D38B80DF1B69D4E40097D5AC /* Build configuration list for PBXNativeTarget "sensor" */ = {
 			isa = XCConfigurationList;
@@ -758,6 +769,7 @@
 				D38B80E11B69D4E40097D5AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D38B80E21B69D4E40097D5AC /* Build configuration list for PBXNativeTarget "sensorTests" */ = {
 			isa = XCConfigurationList;
@@ -766,6 +778,7 @@
 				D38B80E41B69D4E40097D5AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D38B80E51B69D4E40097D5AC /* Build configuration list for PBXNativeTarget "sensorUITests" */ = {
 			isa = XCConfigurationList;
@@ -774,6 +787,7 @@
 				D38B80E71B69D4E40097D5AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
