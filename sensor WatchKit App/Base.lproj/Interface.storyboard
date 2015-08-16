@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8173.3" systemVersion="14E46" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8083.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8089"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Courier.ttc">
@@ -28,105 +28,105 @@
             <objects>
                 <controller title="Sensor" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="sensor_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <slider width="1" alignment="left" value="2" maximum="10" steps="10" id="9ML-Ef-UQJ">
+                        <slider width="1" alignment="left" value="2" maximum="10" steps="10" id="zdV-pA-dgq">
                             <connections>
-                                <action selector="durationAction:" destination="AgC-eL-Hgc" id="Ikk-BL-mQU"/>
+                                <action selector="durationAction:" destination="AgC-eL-Hgc" id="pbE-PL-a24"/>
                             </connections>
                         </slider>
-                        <group width="134" alignment="left" id="iEq-YS-iTE">
+                        <group width="134" alignment="left" id="lOR-gt-YqV">
                             <items>
-                                <label alignment="right" text="2.0" id="O3E-NW-X7h">
+                                <label alignment="right" text="2.0" id="sN8-CB-pgp">
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
-                                <label alignment="left" text="durationMins" id="77q-JU-QJb">
+                                <label alignment="left" text="durationMins" id="wXL-g0-ioI">
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
                             </items>
                         </group>
-                        <button width="1" alignment="left" title="Start Recorder" enabled="NO" id="maU-vD-b2B">
+                        <button width="1" alignment="left" title="Start Recorder" enabled="NO" id="rb7-sH-WxW">
                             <connections>
-                                <action selector="startRecorderAction" destination="AgC-eL-Hgc" id="Jju-P6-b0X"/>
+                                <action selector="startRecorderAction" destination="AgC-eL-Hgc" id="3J3-o5-n2d"/>
                             </connections>
                         </button>
-                        <group width="136" alignment="left" id="kx7-gE-irf">
+                        <group width="136" alignment="left" id="d4u-i1-o4i">
                             <items>
-                                <label height="9" alignment="right" text="hhmmss" id="mJE-9j-MYU">
+                                <label height="9" alignment="right" text="hhmmss" id="eie-mm-71m">
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
-                                <label alignment="left" text="lastStart" id="1J3-ex-h9x">
+                                <label alignment="left" text="lastStart" id="m6Q-f4-IEC">
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
                             </items>
                         </group>
-                        <switch width="1" alignment="left" title="Dequeuer" id="VLk-4P-Gbt">
+                        <switch width="1" alignment="left" title="Dequeuer" id="KdN-sE-SIp">
                             <connections>
-                                <action selector="dequeuerAction:" destination="AgC-eL-Hgc" id="exA-hv-mbx"/>
+                                <action selector="dequeuerAction:" destination="AgC-eL-Hgc" id="lkf-IR-Q9h"/>
                             </connections>
                         </switch>
-                        <group width="134" height="11" alignment="left" id="DeK-sG-ENv">
+                        <group width="134" height="11" alignment="left" id="byP-vy-UQn">
                             <items>
-                                <label alignment="left" text="cmdCount" id="S11-C4-81O">
+                                <label alignment="left" text="cmdCount" id="Qvk-Jx-FZy">
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
-                                <label alignment="right" text="0" id="jae-NY-sNe">
+                                <label alignment="right" text="0" id="yWr-hT-7hV">
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
                             </items>
                         </group>
-                        <group width="134" height="11" alignment="left" id="dwc-ox-v8O">
+                        <group width="134" height="11" alignment="left" id="94Y-AT-mGG">
                             <items>
-                                <label alignment="left" text="batchNum" id="Egv-Ub-BqF">
+                                <label alignment="left" text="batchNum" id="FIM-2O-htH">
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
-                                <label alignment="right" text="0" id="HuM-WF-sMr">
+                                <label alignment="right" text="0" id="K7E-ZR-nfV">
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
                             </items>
                         </group>
-                        <group width="134" height="11" alignment="left" id="RTl-eD-HLY">
+                        <group width="134" height="11" alignment="left" id="KaP-gl-Sb0">
                             <items>
-                                <label alignment="left" text="itemCount" id="0bq-mE-Nli">
+                                <label alignment="left" text="itemCount" id="ukg-6e-kD5">
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
-                                <label alignment="right" text="0" id="8Rq-U1-TSG">
+                                <label alignment="right" text="0" id="mBV-PB-Obv">
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
                             </items>
                         </group>
-                        <group width="134" height="11" alignment="left" id="mrM-Ua-7c5">
+                        <group width="134" height="11" alignment="left" id="yNu-Hq-H54">
                             <items>
-                                <label alignment="left" text="latest" id="0Le-gQ-kEU">
+                                <label alignment="left" text="latest" id="NL3-hp-J1a">
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
-                                <label alignment="right" text="mmddyy" id="Nik-r1-z8n">
+                                <label alignment="right" text="mmddyy" id="spF-Gg-Mps">
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
                             </items>
                         </group>
-                        <group width="134" height="11" alignment="left" id="n6E-mF-NvS">
+                        <group width="134" height="11" alignment="left" id="GlE-pW-4Dd">
                             <items>
-                                <label alignment="left" text="queueDepth" id="IVq-HQ-K7t">
+                                <label alignment="left" text="queueDepth" id="vyk-Of-t10">
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
-                                <label alignment="right" text="0" id="9UV-YW-kFs">
+                                <label alignment="right" text="0" id="j0n-bp-Fk9">
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
                             </items>
                         </group>
                     </items>
                     <connections>
-                        <outlet property="batchNumVal" destination="HuM-WF-sMr" id="9LK-WW-3Ig"/>
-                        <outlet property="cmdCountVal" destination="jae-NY-sNe" id="iFt-ng-oju"/>
-                        <outlet property="durationVal" destination="O3E-NW-X7h" id="Lou-sQ-rCe"/>
-                        <outlet property="itemCountVal" destination="8Rq-U1-TSG" id="UYs-Xg-qae"/>
-                        <outlet property="lastStartVal" destination="mJE-9j-MYU" id="Mx1-Dn-SBw"/>
-                        <outlet property="latestVal" destination="Nik-r1-z8n" id="9Tu-ep-g5t"/>
-                        <outlet property="queueDepthVal" destination="9UV-YW-kFs" id="MZ8-4t-mf0"/>
-                        <outlet property="startVal" destination="maU-vD-b2B" id="Pfw-nI-Mx4"/>
+                        <outlet property="batchNumVal" destination="K7E-ZR-nfV" id="gHO-hl-QQu"/>
+                        <outlet property="cmdCountVal" destination="yWr-hT-7hV" id="5uT-s4-oWs"/>
+                        <outlet property="durationVal" destination="sN8-CB-pgp" id="DD4-us-MCb"/>
+                        <outlet property="itemCountVal" destination="mBV-PB-Obv" id="cGf-VV-llG"/>
+                        <outlet property="lastStartVal" destination="eie-mm-71m" id="1L5-qr-W3F"/>
+                        <outlet property="latestVal" destination="spF-Gg-Mps" id="dnD-J3-E6L"/>
+                        <outlet property="queueDepthVal" destination="j0n-bp-Fk9" id="Tnl-RH-9Nv"/>
+                        <outlet property="startVal" destination="rb7-sH-WxW" id="yeV-Fo-r6B"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="235" y="349"/>
+            <point key="canvasLocation" x="235" y="362"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">

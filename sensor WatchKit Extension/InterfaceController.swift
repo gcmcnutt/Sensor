@@ -30,7 +30,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     let dateFormatter = NSDateFormatter()
 
     var durationValue = 2.0
-    var lastStart = NSDate.distantFuture()
+    var lastStart = NSDate()
     var timer = NSTimer()
     var dequeuerState = false
     
@@ -83,17 +83,15 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBAction func startRecorderAction() {
         lastStart = NSDate()
         self.lastStartVal.setText(dateFormatter.stringFromDate(lastStart))
-        self.sr.recordAccelerometerFor(durationValue * 60.0)
+        self.sr.recordAccelerometerForDuration(durationValue * 60.0)
     }
 
     @IBAction func dequeuerAction(value: Bool) {
         dequeuerState = value
         
-        // reset the batch scanner to latestDate
         if (dequeuerState) {
-            batchNum = 0
+            latestDate = lastStart
         }
-        
         manageDequeuerTimer(true)
     }
     
@@ -114,19 +112,12 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         
         cmdCount++
         
-        // first or subsequent batch?
-        let data : CMSensorDataList!
-        if (batchNum == 0) {
-            data = sr.accelerometerDataFrom(lastStart, to: NSDate())
-        } else {
-            data = sr.accelerometerDataSince(batchNum)
-        }
-        
+        let data = sr.accelerometerDataFromDate(latestDate, toDate: NSDate())
         if (data != nil) {
             var currentBatch : UInt64 = 0
             var payloadBatch : [String] = []
             
-            for element in data as CMSensorDataList {
+            for element in data! {
                 
                 let lastElement = element as! CMRecordedAccelerometerData
                 
@@ -156,11 +147,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                 if (result != nil) {
                     
                 }
-            }
-        
-            // if we had data track the next batch for next round
-            if (currentBatch != 0) {
-                batchNum = currentBatch + 1
             }
         }
         

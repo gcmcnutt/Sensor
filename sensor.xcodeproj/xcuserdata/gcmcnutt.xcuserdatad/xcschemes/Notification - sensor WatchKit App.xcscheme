@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D38B80B11B69D4E40097D5AC"
+               BlueprintIdentifier = "D3A2CF681B7F185F0013AAD2"
                BuildableName = "sensor WatchKit App.app"
                BlueprintName = "sensor WatchKit App"
                ReferencedContainer = "container:sensor.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D38B80891B69D4E30097D5AC"
+               BlueprintIdentifier = "D3A2CF401B7F185F0013AAD2"
                BuildableName = "sensor.app"
                BlueprintName = "sensor"
                ReferencedContainer = "container:sensor.xcodeproj">
@@ -42,7 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D38B80C01B69D4E40097D5AC"
+               BlueprintIdentifier = "D3A2CF771B7F185F0013AAD2"
                BuildableName = "sensor WatchKit Extension.appex"
                BlueprintName = "sensor WatchKit Extension"
                ReferencedContainer = "container:sensor.xcodeproj">
@@ -60,7 +60,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D38B80B11B69D4E40097D5AC"
+            BlueprintIdentifier = "D3A2CF681B7F185F0013AAD2"
             BuildableName = "sensor WatchKit App.app"
             BlueprintName = "sensor WatchKit App"
             ReferencedContainer = "container:sensor.xcodeproj">
@@ -87,7 +87,7 @@
          RemotePath = "/sensor WatchKit App">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D38B80B11B69D4E40097D5AC"
+            BlueprintIdentifier = "D3A2CF681B7F185F0013AAD2"
             BuildableName = "sensor WatchKit App.app"
             BlueprintName = "sensor WatchKit App"
             ReferencedContainer = "container:sensor.xcodeproj">
@@ -96,7 +96,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D38B80B11B69D4E40097D5AC"
+            BlueprintIdentifier = "D3A2CF681B7F185F0013AAD2"
             BuildableName = "sensor WatchKit App.app"
             BlueprintName = "sensor WatchKit App"
             ReferencedContainer = "container:sensor.xcodeproj">
@@ -119,7 +119,7 @@
          RemotePath = "/sensor WatchKit App">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D38B80B11B69D4E40097D5AC"
+            BlueprintIdentifier = "D3A2CF681B7F185F0013AAD2"
             BuildableName = "sensor WatchKit App.app"
             BlueprintName = "sensor WatchKit App"
             ReferencedContainer = "container:sensor.xcodeproj">
@@ -128,7 +128,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D38B80B11B69D4E40097D5AC"
+            BlueprintIdentifier = "D3A2CF681B7F185F0013AAD2"
             BuildableName = "sensor WatchKit App.app"
             BlueprintName = "sensor WatchKit App"
             ReferencedContainer = "container:sensor.xcodeproj">

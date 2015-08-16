@@ -7,75 +7,75 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D362848B1B6EA6AF004F9B5B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D36284891B6EA6AF004F9B5B /* Interface.storyboard */; };
-		D38B808E1B69D4E30097D5AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B808D1B69D4E30097D5AC /* AppDelegate.swift */; };
-		D38B80901B69D4E30097D5AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B808F1B69D4E30097D5AC /* ViewController.swift */; };
-		D38B80931B69D4E30097D5AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D38B80911B69D4E30097D5AC /* Main.storyboard */; };
-		D38B80951B69D4E30097D5AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D38B80941B69D4E30097D5AC /* Assets.xcassets */; };
-		D38B80981B69D4E30097D5AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D38B80961B69D4E30097D5AC /* LaunchScreen.storyboard */; };
-		D38B80A31B69D4E30097D5AC /* sensorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B80A21B69D4E30097D5AC /* sensorTests.swift */; };
-		D38B80AE1B69D4E30097D5AC /* sensorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B80AD1B69D4E30097D5AC /* sensorUITests.swift */; };
-		D38B80B31B69D4E40097D5AC /* sensor WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D38B80B21B69D4E40097D5AC /* sensor WatchKit App.app */; };
-		D38B80BB1B69D4E40097D5AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D38B80BA1B69D4E40097D5AC /* Assets.xcassets */; };
-		D38B80C21B69D4E40097D5AC /* sensor WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D38B80C11B69D4E40097D5AC /* sensor WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		D38B80C91B69D4E40097D5AC /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B80C81B69D4E40097D5AC /* InterfaceController.swift */; };
-		D38B80CB1B69D4E40097D5AC /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B80CA1B69D4E40097D5AC /* ExtensionDelegate.swift */; };
-		D38B80CD1B69D4E40097D5AC /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B80CC1B69D4E40097D5AC /* NotificationController.swift */; };
-		D38B80CF1B69D4E40097D5AC /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B80CE1B69D4E40097D5AC /* GlanceController.swift */; };
-		D38B80D11B69D4E40097D5AC /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B80D01B69D4E40097D5AC /* ComplicationController.swift */; };
-		D38B80D31B69D4E40097D5AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D38B80D21B69D4E40097D5AC /* Assets.xcassets */; };
+		D3A2CF451B7F185F0013AAD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2CF441B7F185F0013AAD2 /* AppDelegate.swift */; };
+		D3A2CF471B7F185F0013AAD2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2CF461B7F185F0013AAD2 /* ViewController.swift */; };
+		D3A2CF4A1B7F185F0013AAD2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3A2CF481B7F185F0013AAD2 /* Main.storyboard */; };
+		D3A2CF4C1B7F185F0013AAD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3A2CF4B1B7F185F0013AAD2 /* Assets.xcassets */; };
+		D3A2CF4F1B7F185F0013AAD2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3A2CF4D1B7F185F0013AAD2 /* LaunchScreen.storyboard */; };
+		D3A2CF5A1B7F185F0013AAD2 /* sensorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2CF591B7F185F0013AAD2 /* sensorTests.swift */; };
+		D3A2CF651B7F185F0013AAD2 /* sensorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2CF641B7F185F0013AAD2 /* sensorUITests.swift */; };
+		D3A2CF6A1B7F185F0013AAD2 /* sensor WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D3A2CF691B7F185F0013AAD2 /* sensor WatchKit App.app */; };
+		D3A2CF701B7F185F0013AAD2 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3A2CF6E1B7F185F0013AAD2 /* Interface.storyboard */; };
+		D3A2CF721B7F185F0013AAD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3A2CF711B7F185F0013AAD2 /* Assets.xcassets */; };
+		D3A2CF791B7F185F0013AAD2 /* sensor WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D3A2CF781B7F185F0013AAD2 /* sensor WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D3A2CF801B7F185F0013AAD2 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2CF7F1B7F185F0013AAD2 /* InterfaceController.swift */; };
+		D3A2CF821B7F185F0013AAD2 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2CF811B7F185F0013AAD2 /* ExtensionDelegate.swift */; };
+		D3A2CF841B7F185F0013AAD2 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2CF831B7F185F0013AAD2 /* NotificationController.swift */; };
+		D3A2CF861B7F185F0013AAD2 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2CF851B7F185F0013AAD2 /* GlanceController.swift */; };
+		D3A2CF881B7F185F0013AAD2 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2CF871B7F185F0013AAD2 /* ComplicationController.swift */; };
+		D3A2CF8A1B7F185F0013AAD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3A2CF891B7F185F0013AAD2 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D38B809F1B69D4E30097D5AC /* PBXContainerItemProxy */ = {
+		D3A2CF561B7F185F0013AAD2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D38B80821B69D4E30097D5AC /* Project object */;
+			containerPortal = D3A2CF391B7F185F0013AAD2 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D38B80891B69D4E30097D5AC;
+			remoteGlobalIDString = D3A2CF401B7F185F0013AAD2;
 			remoteInfo = sensor;
 		};
-		D38B80AA1B69D4E30097D5AC /* PBXContainerItemProxy */ = {
+		D3A2CF611B7F185F0013AAD2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D38B80821B69D4E30097D5AC /* Project object */;
+			containerPortal = D3A2CF391B7F185F0013AAD2 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D38B80891B69D4E30097D5AC;
+			remoteGlobalIDString = D3A2CF401B7F185F0013AAD2;
 			remoteInfo = sensor;
 		};
-		D38B80B41B69D4E40097D5AC /* PBXContainerItemProxy */ = {
+		D3A2CF6B1B7F185F0013AAD2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D38B80821B69D4E30097D5AC /* Project object */;
+			containerPortal = D3A2CF391B7F185F0013AAD2 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D38B80B11B69D4E40097D5AC;
+			remoteGlobalIDString = D3A2CF681B7F185F0013AAD2;
 			remoteInfo = "sensor WatchKit App";
 		};
-		D38B80C31B69D4E40097D5AC /* PBXContainerItemProxy */ = {
+		D3A2CF7A1B7F185F0013AAD2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D38B80821B69D4E30097D5AC /* Project object */;
+			containerPortal = D3A2CF391B7F185F0013AAD2 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D38B80C01B69D4E40097D5AC;
+			remoteGlobalIDString = D3A2CF771B7F185F0013AAD2;
 			remoteInfo = "sensor WatchKit Extension";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D38B80DA1B69D4E40097D5AC /* Embed App Extensions */ = {
+		D3A2CF911B7F185F0013AAD2 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				D38B80C21B69D4E40097D5AC /* sensor WatchKit Extension.appex in Embed App Extensions */,
+				D3A2CF791B7F185F0013AAD2 /* sensor WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D38B80DE1B69D4E40097D5AC /* Embed Watch Content */ = {
+		D3A2CF951B7F185F0013AAD2 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				D38B80B31B69D4E40097D5AC /* sensor WatchKit App.app in Embed Watch Content */,
+				D3A2CF6A1B7F185F0013AAD2 /* sensor WatchKit App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,57 +83,57 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D362848A1B6EA6AF004F9B5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		D38B808A1B69D4E30097D5AC /* sensor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sensor.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D38B808D1B69D4E30097D5AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D38B808F1B69D4E30097D5AC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D38B80921B69D4E30097D5AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D38B80941B69D4E30097D5AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D38B80971B69D4E30097D5AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D38B80991B69D4E30097D5AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D38B809E1B69D4E30097D5AC /* sensorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sensorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D38B80A21B69D4E30097D5AC /* sensorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sensorTests.swift; sourceTree = "<group>"; };
-		D38B80A41B69D4E30097D5AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D38B80A91B69D4E30097D5AC /* sensorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sensorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D38B80AD1B69D4E30097D5AC /* sensorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sensorUITests.swift; sourceTree = "<group>"; };
-		D38B80AF1B69D4E30097D5AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D38B80B21B69D4E40097D5AC /* sensor WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sensor WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D38B80BA1B69D4E40097D5AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D38B80BC1B69D4E40097D5AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D38B80C11B69D4E40097D5AC /* sensor WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "sensor WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D38B80C71B69D4E40097D5AC /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		D38B80C81B69D4E40097D5AC /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
-		D38B80CA1B69D4E40097D5AC /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
-		D38B80CC1B69D4E40097D5AC /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		D38B80CE1B69D4E40097D5AC /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
-		D38B80D01B69D4E40097D5AC /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
-		D38B80D21B69D4E40097D5AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D38B80D41B69D4E40097D5AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3A2CF411B7F185F0013AAD2 /* sensor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sensor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3A2CF441B7F185F0013AAD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D3A2CF461B7F185F0013AAD2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D3A2CF491B7F185F0013AAD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D3A2CF4B1B7F185F0013AAD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D3A2CF4E1B7F185F0013AAD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D3A2CF501B7F185F0013AAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3A2CF551B7F185F0013AAD2 /* sensorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sensorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3A2CF591B7F185F0013AAD2 /* sensorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sensorTests.swift; sourceTree = "<group>"; };
+		D3A2CF5B1B7F185F0013AAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3A2CF601B7F185F0013AAD2 /* sensorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sensorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3A2CF641B7F185F0013AAD2 /* sensorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sensorUITests.swift; sourceTree = "<group>"; };
+		D3A2CF661B7F185F0013AAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3A2CF691B7F185F0013AAD2 /* sensor WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sensor WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3A2CF6F1B7F185F0013AAD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		D3A2CF711B7F185F0013AAD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D3A2CF731B7F185F0013AAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3A2CF781B7F185F0013AAD2 /* sensor WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "sensor WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3A2CF7E1B7F185F0013AAD2 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		D3A2CF7F1B7F185F0013AAD2 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		D3A2CF811B7F185F0013AAD2 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		D3A2CF831B7F185F0013AAD2 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		D3A2CF851B7F185F0013AAD2 /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
+		D3A2CF871B7F185F0013AAD2 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		D3A2CF891B7F185F0013AAD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D3A2CF8B1B7F185F0013AAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D38B80871B69D4E30097D5AC /* Frameworks */ = {
+		D3A2CF3E1B7F185F0013AAD2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D38B809B1B69D4E30097D5AC /* Frameworks */ = {
+		D3A2CF521B7F185F0013AAD2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D38B80A61B69D4E30097D5AC /* Frameworks */ = {
+		D3A2CF5D1B7F185F0013AAD2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D38B80BE1B69D4E40097D5AC /* Frameworks */ = {
+		D3A2CF751B7F185F0013AAD2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -143,90 +143,90 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D38B80811B69D4E30097D5AC = {
+		D3A2CF381B7F185F0013AAD2 = {
 			isa = PBXGroup;
 			children = (
-				D38B808C1B69D4E30097D5AC /* sensor */,
-				D38B80A11B69D4E30097D5AC /* sensorTests */,
-				D38B80AC1B69D4E30097D5AC /* sensorUITests */,
-				D38B80B61B69D4E40097D5AC /* sensor WatchKit App */,
-				D38B80C51B69D4E40097D5AC /* sensor WatchKit Extension */,
-				D38B808B1B69D4E30097D5AC /* Products */,
+				D3A2CF431B7F185F0013AAD2 /* sensor */,
+				D3A2CF581B7F185F0013AAD2 /* sensorTests */,
+				D3A2CF631B7F185F0013AAD2 /* sensorUITests */,
+				D3A2CF6D1B7F185F0013AAD2 /* sensor WatchKit App */,
+				D3A2CF7C1B7F185F0013AAD2 /* sensor WatchKit Extension */,
+				D3A2CF421B7F185F0013AAD2 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		D38B808B1B69D4E30097D5AC /* Products */ = {
+		D3A2CF421B7F185F0013AAD2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D38B808A1B69D4E30097D5AC /* sensor.app */,
-				D38B809E1B69D4E30097D5AC /* sensorTests.xctest */,
-				D38B80A91B69D4E30097D5AC /* sensorUITests.xctest */,
-				D38B80B21B69D4E40097D5AC /* sensor WatchKit App.app */,
-				D38B80C11B69D4E40097D5AC /* sensor WatchKit Extension.appex */,
+				D3A2CF411B7F185F0013AAD2 /* sensor.app */,
+				D3A2CF551B7F185F0013AAD2 /* sensorTests.xctest */,
+				D3A2CF601B7F185F0013AAD2 /* sensorUITests.xctest */,
+				D3A2CF691B7F185F0013AAD2 /* sensor WatchKit App.app */,
+				D3A2CF781B7F185F0013AAD2 /* sensor WatchKit Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D38B808C1B69D4E30097D5AC /* sensor */ = {
+		D3A2CF431B7F185F0013AAD2 /* sensor */ = {
 			isa = PBXGroup;
 			children = (
-				D38B808D1B69D4E30097D5AC /* AppDelegate.swift */,
-				D38B808F1B69D4E30097D5AC /* ViewController.swift */,
-				D38B80911B69D4E30097D5AC /* Main.storyboard */,
-				D38B80941B69D4E30097D5AC /* Assets.xcassets */,
-				D38B80961B69D4E30097D5AC /* LaunchScreen.storyboard */,
-				D38B80991B69D4E30097D5AC /* Info.plist */,
+				D3A2CF441B7F185F0013AAD2 /* AppDelegate.swift */,
+				D3A2CF461B7F185F0013AAD2 /* ViewController.swift */,
+				D3A2CF481B7F185F0013AAD2 /* Main.storyboard */,
+				D3A2CF4B1B7F185F0013AAD2 /* Assets.xcassets */,
+				D3A2CF4D1B7F185F0013AAD2 /* LaunchScreen.storyboard */,
+				D3A2CF501B7F185F0013AAD2 /* Info.plist */,
 			);
 			path = sensor;
 			sourceTree = "<group>";
 		};
-		D38B80A11B69D4E30097D5AC /* sensorTests */ = {
+		D3A2CF581B7F185F0013AAD2 /* sensorTests */ = {
 			isa = PBXGroup;
 			children = (
-				D38B80A21B69D4E30097D5AC /* sensorTests.swift */,
-				D38B80A41B69D4E30097D5AC /* Info.plist */,
+				D3A2CF591B7F185F0013AAD2 /* sensorTests.swift */,
+				D3A2CF5B1B7F185F0013AAD2 /* Info.plist */,
 			);
 			path = sensorTests;
 			sourceTree = "<group>";
 		};
-		D38B80AC1B69D4E30097D5AC /* sensorUITests */ = {
+		D3A2CF631B7F185F0013AAD2 /* sensorUITests */ = {
 			isa = PBXGroup;
 			children = (
-				D38B80AD1B69D4E30097D5AC /* sensorUITests.swift */,
-				D38B80AF1B69D4E30097D5AC /* Info.plist */,
+				D3A2CF641B7F185F0013AAD2 /* sensorUITests.swift */,
+				D3A2CF661B7F185F0013AAD2 /* Info.plist */,
 			);
 			path = sensorUITests;
 			sourceTree = "<group>";
 		};
-		D38B80B61B69D4E40097D5AC /* sensor WatchKit App */ = {
+		D3A2CF6D1B7F185F0013AAD2 /* sensor WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
-				D36284891B6EA6AF004F9B5B /* Interface.storyboard */,
-				D38B80BA1B69D4E40097D5AC /* Assets.xcassets */,
-				D38B80BC1B69D4E40097D5AC /* Info.plist */,
+				D3A2CF6E1B7F185F0013AAD2 /* Interface.storyboard */,
+				D3A2CF711B7F185F0013AAD2 /* Assets.xcassets */,
+				D3A2CF731B7F185F0013AAD2 /* Info.plist */,
 			);
 			path = "sensor WatchKit App";
 			sourceTree = "<group>";
 		};
-		D38B80C51B69D4E40097D5AC /* sensor WatchKit Extension */ = {
+		D3A2CF7C1B7F185F0013AAD2 /* sensor WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				D38B80C81B69D4E40097D5AC /* InterfaceController.swift */,
-				D38B80CA1B69D4E40097D5AC /* ExtensionDelegate.swift */,
-				D38B80CC1B69D4E40097D5AC /* NotificationController.swift */,
-				D38B80CE1B69D4E40097D5AC /* GlanceController.swift */,
-				D38B80D01B69D4E40097D5AC /* ComplicationController.swift */,
-				D38B80D21B69D4E40097D5AC /* Assets.xcassets */,
-				D38B80D41B69D4E40097D5AC /* Info.plist */,
-				D38B80C61B69D4E40097D5AC /* Supporting Files */,
+				D3A2CF7F1B7F185F0013AAD2 /* InterfaceController.swift */,
+				D3A2CF811B7F185F0013AAD2 /* ExtensionDelegate.swift */,
+				D3A2CF831B7F185F0013AAD2 /* NotificationController.swift */,
+				D3A2CF851B7F185F0013AAD2 /* GlanceController.swift */,
+				D3A2CF871B7F185F0013AAD2 /* ComplicationController.swift */,
+				D3A2CF891B7F185F0013AAD2 /* Assets.xcassets */,
+				D3A2CF8B1B7F185F0013AAD2 /* Info.plist */,
+				D3A2CF7D1B7F185F0013AAD2 /* Supporting Files */,
 			);
 			path = "sensor WatchKit Extension";
 			sourceTree = "<group>";
 		};
-		D38B80C61B69D4E40097D5AC /* Supporting Files */ = {
+		D3A2CF7D1B7F185F0013AAD2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D38B80C71B69D4E40097D5AC /* PushNotificationPayload.apns */,
+				D3A2CF7E1B7F185F0013AAD2 /* PushNotificationPayload.apns */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -234,85 +234,85 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D38B80891B69D4E30097D5AC /* sensor */ = {
+		D3A2CF401B7F185F0013AAD2 /* sensor */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D38B80DF1B69D4E40097D5AC /* Build configuration list for PBXNativeTarget "sensor" */;
+			buildConfigurationList = D3A2CF961B7F185F0013AAD2 /* Build configuration list for PBXNativeTarget "sensor" */;
 			buildPhases = (
-				D38B80861B69D4E30097D5AC /* Sources */,
-				D38B80871B69D4E30097D5AC /* Frameworks */,
-				D38B80881B69D4E30097D5AC /* Resources */,
-				D38B80DE1B69D4E40097D5AC /* Embed Watch Content */,
+				D3A2CF3D1B7F185F0013AAD2 /* Sources */,
+				D3A2CF3E1B7F185F0013AAD2 /* Frameworks */,
+				D3A2CF3F1B7F185F0013AAD2 /* Resources */,
+				D3A2CF951B7F185F0013AAD2 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D38B80B51B69D4E40097D5AC /* PBXTargetDependency */,
+				D3A2CF6C1B7F185F0013AAD2 /* PBXTargetDependency */,
 			);
 			name = sensor;
 			productName = sensor;
-			productReference = D38B808A1B69D4E30097D5AC /* sensor.app */;
+			productReference = D3A2CF411B7F185F0013AAD2 /* sensor.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D38B809D1B69D4E30097D5AC /* sensorTests */ = {
+		D3A2CF541B7F185F0013AAD2 /* sensorTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D38B80E21B69D4E40097D5AC /* Build configuration list for PBXNativeTarget "sensorTests" */;
+			buildConfigurationList = D3A2CF991B7F185F0013AAD2 /* Build configuration list for PBXNativeTarget "sensorTests" */;
 			buildPhases = (
-				D38B809A1B69D4E30097D5AC /* Sources */,
-				D38B809B1B69D4E30097D5AC /* Frameworks */,
-				D38B809C1B69D4E30097D5AC /* Resources */,
+				D3A2CF511B7F185F0013AAD2 /* Sources */,
+				D3A2CF521B7F185F0013AAD2 /* Frameworks */,
+				D3A2CF531B7F185F0013AAD2 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D38B80A01B69D4E30097D5AC /* PBXTargetDependency */,
+				D3A2CF571B7F185F0013AAD2 /* PBXTargetDependency */,
 			);
 			name = sensorTests;
 			productName = sensorTests;
-			productReference = D38B809E1B69D4E30097D5AC /* sensorTests.xctest */;
+			productReference = D3A2CF551B7F185F0013AAD2 /* sensorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D38B80A81B69D4E30097D5AC /* sensorUITests */ = {
+		D3A2CF5F1B7F185F0013AAD2 /* sensorUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D38B80E51B69D4E40097D5AC /* Build configuration list for PBXNativeTarget "sensorUITests" */;
+			buildConfigurationList = D3A2CF9C1B7F185F0013AAD2 /* Build configuration list for PBXNativeTarget "sensorUITests" */;
 			buildPhases = (
-				D38B80A51B69D4E30097D5AC /* Sources */,
-				D38B80A61B69D4E30097D5AC /* Frameworks */,
-				D38B80A71B69D4E30097D5AC /* Resources */,
+				D3A2CF5C1B7F185F0013AAD2 /* Sources */,
+				D3A2CF5D1B7F185F0013AAD2 /* Frameworks */,
+				D3A2CF5E1B7F185F0013AAD2 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D38B80AB1B69D4E30097D5AC /* PBXTargetDependency */,
+				D3A2CF621B7F185F0013AAD2 /* PBXTargetDependency */,
 			);
 			name = sensorUITests;
 			productName = sensorUITests;
-			productReference = D38B80A91B69D4E30097D5AC /* sensorUITests.xctest */;
+			productReference = D3A2CF601B7F185F0013AAD2 /* sensorUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		D38B80B11B69D4E40097D5AC /* sensor WatchKit App */ = {
+		D3A2CF681B7F185F0013AAD2 /* sensor WatchKit App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D38B80DB1B69D4E40097D5AC /* Build configuration list for PBXNativeTarget "sensor WatchKit App" */;
+			buildConfigurationList = D3A2CF921B7F185F0013AAD2 /* Build configuration list for PBXNativeTarget "sensor WatchKit App" */;
 			buildPhases = (
-				D38B80B01B69D4E40097D5AC /* Resources */,
-				D38B80DA1B69D4E40097D5AC /* Embed App Extensions */,
+				D3A2CF671B7F185F0013AAD2 /* Resources */,
+				D3A2CF911B7F185F0013AAD2 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D38B80C41B69D4E40097D5AC /* PBXTargetDependency */,
+				D3A2CF7B1B7F185F0013AAD2 /* PBXTargetDependency */,
 			);
 			name = "sensor WatchKit App";
 			productName = "sensor WatchKit App";
-			productReference = D38B80B21B69D4E40097D5AC /* sensor WatchKit App.app */;
+			productReference = D3A2CF691B7F185F0013AAD2 /* sensor WatchKit App.app */;
 			productType = "com.apple.product-type.application.watchapp2";
 		};
-		D38B80C01B69D4E40097D5AC /* sensor WatchKit Extension */ = {
+		D3A2CF771B7F185F0013AAD2 /* sensor WatchKit Extension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D38B80D71B69D4E40097D5AC /* Build configuration list for PBXNativeTarget "sensor WatchKit Extension" */;
+			buildConfigurationList = D3A2CF8E1B7F185F0013AAD2 /* Build configuration list for PBXNativeTarget "sensor WatchKit Extension" */;
 			buildPhases = (
-				D38B80BD1B69D4E40097D5AC /* Sources */,
-				D38B80BE1B69D4E40097D5AC /* Frameworks */,
-				D38B80BF1B69D4E40097D5AC /* Resources */,
+				D3A2CF741B7F185F0013AAD2 /* Sources */,
+				D3A2CF751B7F185F0013AAD2 /* Frameworks */,
+				D3A2CF761B7F185F0013AAD2 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -320,41 +320,41 @@
 			);
 			name = "sensor WatchKit Extension";
 			productName = "sensor WatchKit Extension";
-			productReference = D38B80C11B69D4E40097D5AC /* sensor WatchKit Extension.appex */;
+			productReference = D3A2CF781B7F185F0013AAD2 /* sensor WatchKit Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D38B80821B69D4E30097D5AC /* Project object */ = {
+		D3A2CF391B7F185F0013AAD2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Greg McNutt";
 				TargetAttributes = {
-					D38B80891B69D4E30097D5AC = {
+					D3A2CF401B7F185F0013AAD2 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = ZFJ4RM7VL4;
 					};
-					D38B809D1B69D4E30097D5AC = {
+					D3A2CF541B7F185F0013AAD2 = {
 						CreatedOnToolsVersion = 7.0;
-						TestTargetID = D38B80891B69D4E30097D5AC;
+						TestTargetID = D3A2CF401B7F185F0013AAD2;
 					};
-					D38B80A81B69D4E30097D5AC = {
+					D3A2CF5F1B7F185F0013AAD2 = {
 						CreatedOnToolsVersion = 7.0;
-						TestTargetID = D38B80891B69D4E30097D5AC;
+						TestTargetID = D3A2CF401B7F185F0013AAD2;
 					};
-					D38B80B11B69D4E40097D5AC = {
+					D3A2CF681B7F185F0013AAD2 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = ZFJ4RM7VL4;
 					};
-					D38B80C01B69D4E40097D5AC = {
+					D3A2CF771B7F185F0013AAD2 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = ZFJ4RM7VL4;
 					};
 				};
 			};
-			buildConfigurationList = D38B80851B69D4E30097D5AC /* Build configuration list for PBXProject "sensor" */;
+			buildConfigurationList = D3A2CF3C1B7F185F0013AAD2 /* Build configuration list for PBXProject "sensor" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -362,156 +362,156 @@
 				en,
 				Base,
 			);
-			mainGroup = D38B80811B69D4E30097D5AC;
-			productRefGroup = D38B808B1B69D4E30097D5AC /* Products */;
+			mainGroup = D3A2CF381B7F185F0013AAD2;
+			productRefGroup = D3A2CF421B7F185F0013AAD2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D38B80891B69D4E30097D5AC /* sensor */,
-				D38B809D1B69D4E30097D5AC /* sensorTests */,
-				D38B80A81B69D4E30097D5AC /* sensorUITests */,
-				D38B80B11B69D4E40097D5AC /* sensor WatchKit App */,
-				D38B80C01B69D4E40097D5AC /* sensor WatchKit Extension */,
+				D3A2CF401B7F185F0013AAD2 /* sensor */,
+				D3A2CF541B7F185F0013AAD2 /* sensorTests */,
+				D3A2CF5F1B7F185F0013AAD2 /* sensorUITests */,
+				D3A2CF681B7F185F0013AAD2 /* sensor WatchKit App */,
+				D3A2CF771B7F185F0013AAD2 /* sensor WatchKit Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D38B80881B69D4E30097D5AC /* Resources */ = {
+		D3A2CF3F1B7F185F0013AAD2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D38B80981B69D4E30097D5AC /* LaunchScreen.storyboard in Resources */,
-				D38B80951B69D4E30097D5AC /* Assets.xcassets in Resources */,
-				D38B80931B69D4E30097D5AC /* Main.storyboard in Resources */,
+				D3A2CF4F1B7F185F0013AAD2 /* LaunchScreen.storyboard in Resources */,
+				D3A2CF4C1B7F185F0013AAD2 /* Assets.xcassets in Resources */,
+				D3A2CF4A1B7F185F0013AAD2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D38B809C1B69D4E30097D5AC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D38B80A71B69D4E30097D5AC /* Resources */ = {
+		D3A2CF531B7F185F0013AAD2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D38B80B01B69D4E40097D5AC /* Resources */ = {
+		D3A2CF5E1B7F185F0013AAD2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D362848B1B6EA6AF004F9B5B /* Interface.storyboard in Resources */,
-				D38B80BB1B69D4E40097D5AC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D38B80BF1B69D4E40097D5AC /* Resources */ = {
+		D3A2CF671B7F185F0013AAD2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D38B80D31B69D4E40097D5AC /* Assets.xcassets in Resources */,
+				D3A2CF721B7F185F0013AAD2 /* Assets.xcassets in Resources */,
+				D3A2CF701B7F185F0013AAD2 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3A2CF761B7F185F0013AAD2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3A2CF8A1B7F185F0013AAD2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D38B80861B69D4E30097D5AC /* Sources */ = {
+		D3A2CF3D1B7F185F0013AAD2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D38B80901B69D4E30097D5AC /* ViewController.swift in Sources */,
-				D38B808E1B69D4E30097D5AC /* AppDelegate.swift in Sources */,
+				D3A2CF471B7F185F0013AAD2 /* ViewController.swift in Sources */,
+				D3A2CF451B7F185F0013AAD2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D38B809A1B69D4E30097D5AC /* Sources */ = {
+		D3A2CF511B7F185F0013AAD2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D38B80A31B69D4E30097D5AC /* sensorTests.swift in Sources */,
+				D3A2CF5A1B7F185F0013AAD2 /* sensorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D38B80A51B69D4E30097D5AC /* Sources */ = {
+		D3A2CF5C1B7F185F0013AAD2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D38B80AE1B69D4E30097D5AC /* sensorUITests.swift in Sources */,
+				D3A2CF651B7F185F0013AAD2 /* sensorUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D38B80BD1B69D4E40097D5AC /* Sources */ = {
+		D3A2CF741B7F185F0013AAD2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D38B80CD1B69D4E40097D5AC /* NotificationController.swift in Sources */,
-				D38B80CB1B69D4E40097D5AC /* ExtensionDelegate.swift in Sources */,
-				D38B80D11B69D4E40097D5AC /* ComplicationController.swift in Sources */,
-				D38B80C91B69D4E40097D5AC /* InterfaceController.swift in Sources */,
-				D38B80CF1B69D4E40097D5AC /* GlanceController.swift in Sources */,
+				D3A2CF841B7F185F0013AAD2 /* NotificationController.swift in Sources */,
+				D3A2CF821B7F185F0013AAD2 /* ExtensionDelegate.swift in Sources */,
+				D3A2CF881B7F185F0013AAD2 /* ComplicationController.swift in Sources */,
+				D3A2CF801B7F185F0013AAD2 /* InterfaceController.swift in Sources */,
+				D3A2CF861B7F185F0013AAD2 /* GlanceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D38B80A01B69D4E30097D5AC /* PBXTargetDependency */ = {
+		D3A2CF571B7F185F0013AAD2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D38B80891B69D4E30097D5AC /* sensor */;
-			targetProxy = D38B809F1B69D4E30097D5AC /* PBXContainerItemProxy */;
+			target = D3A2CF401B7F185F0013AAD2 /* sensor */;
+			targetProxy = D3A2CF561B7F185F0013AAD2 /* PBXContainerItemProxy */;
 		};
-		D38B80AB1B69D4E30097D5AC /* PBXTargetDependency */ = {
+		D3A2CF621B7F185F0013AAD2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D38B80891B69D4E30097D5AC /* sensor */;
-			targetProxy = D38B80AA1B69D4E30097D5AC /* PBXContainerItemProxy */;
+			target = D3A2CF401B7F185F0013AAD2 /* sensor */;
+			targetProxy = D3A2CF611B7F185F0013AAD2 /* PBXContainerItemProxy */;
 		};
-		D38B80B51B69D4E40097D5AC /* PBXTargetDependency */ = {
+		D3A2CF6C1B7F185F0013AAD2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D38B80B11B69D4E40097D5AC /* sensor WatchKit App */;
-			targetProxy = D38B80B41B69D4E40097D5AC /* PBXContainerItemProxy */;
+			target = D3A2CF681B7F185F0013AAD2 /* sensor WatchKit App */;
+			targetProxy = D3A2CF6B1B7F185F0013AAD2 /* PBXContainerItemProxy */;
 		};
-		D38B80C41B69D4E40097D5AC /* PBXTargetDependency */ = {
+		D3A2CF7B1B7F185F0013AAD2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D38B80C01B69D4E40097D5AC /* sensor WatchKit Extension */;
-			targetProxy = D38B80C31B69D4E40097D5AC /* PBXContainerItemProxy */;
+			target = D3A2CF771B7F185F0013AAD2 /* sensor WatchKit Extension */;
+			targetProxy = D3A2CF7A1B7F185F0013AAD2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D36284891B6EA6AF004F9B5B /* Interface.storyboard */ = {
+		D3A2CF481B7F185F0013AAD2 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D362848A1B6EA6AF004F9B5B /* Base */,
-			);
-			name = Interface.storyboard;
-			sourceTree = "<group>";
-		};
-		D38B80911B69D4E30097D5AC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D38B80921B69D4E30097D5AC /* Base */,
+				D3A2CF491B7F185F0013AAD2 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		D38B80961B69D4E30097D5AC /* LaunchScreen.storyboard */ = {
+		D3A2CF4D1B7F185F0013AAD2 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D38B80971B69D4E30097D5AC /* Base */,
+				D3A2CF4E1B7F185F0013AAD2 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D3A2CF6E1B7F185F0013AAD2 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D3A2CF6F1B7F185F0013AAD2 /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		D38B80D51B69D4E40097D5AC /* Debug */ = {
+		D3A2CF8C1B7F185F0013AAD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -556,7 +556,7 @@
 			};
 			name = Debug;
 		};
-		D38B80D61B69D4E40097D5AC /* Release */ = {
+		D3A2CF8D1B7F185F0013AAD2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -594,7 +594,7 @@
 			};
 			name = Release;
 		};
-		D38B80D81B69D4E40097D5AC /* Debug */ = {
+		D3A2CF8F1B7F185F0013AAD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
@@ -610,7 +610,7 @@
 			};
 			name = Debug;
 		};
-		D38B80D91B69D4E40097D5AC /* Release */ = {
+		D3A2CF901B7F185F0013AAD2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
@@ -626,7 +626,7 @@
 			};
 			name = Release;
 		};
-		D38B80DC1B69D4E40097D5AC /* Debug */ = {
+		D3A2CF931B7F185F0013AAD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -643,7 +643,7 @@
 			};
 			name = Debug;
 		};
-		D38B80DD1B69D4E40097D5AC /* Release */ = {
+		D3A2CF941B7F185F0013AAD2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -660,7 +660,7 @@
 			};
 			name = Release;
 		};
-		D38B80E01B69D4E40097D5AC /* Debug */ = {
+		D3A2CF971B7F185F0013AAD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -672,7 +672,7 @@
 			};
 			name = Debug;
 		};
-		D38B80E11B69D4E40097D5AC /* Release */ = {
+		D3A2CF981B7F185F0013AAD2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -684,7 +684,7 @@
 			};
 			name = Release;
 		};
-		D38B80E31B69D4E40097D5AC /* Debug */ = {
+		D3A2CF9A1B7F185F0013AAD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -696,7 +696,7 @@
 			};
 			name = Debug;
 		};
-		D38B80E41B69D4E40097D5AC /* Release */ = {
+		D3A2CF9B1B7F185F0013AAD2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -708,7 +708,7 @@
 			};
 			name = Release;
 		};
-		D38B80E61B69D4E40097D5AC /* Debug */ = {
+		D3A2CF9D1B7F185F0013AAD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = sensorUITests/Info.plist;
@@ -720,7 +720,7 @@
 			};
 			name = Debug;
 		};
-		D38B80E71B69D4E40097D5AC /* Release */ = {
+		D3A2CF9E1B7F185F0013AAD2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = sensorUITests/Info.plist;
@@ -735,61 +735,61 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D38B80851B69D4E30097D5AC /* Build configuration list for PBXProject "sensor" */ = {
+		D3A2CF3C1B7F185F0013AAD2 /* Build configuration list for PBXProject "sensor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D38B80D51B69D4E40097D5AC /* Debug */,
-				D38B80D61B69D4E40097D5AC /* Release */,
+				D3A2CF8C1B7F185F0013AAD2 /* Debug */,
+				D3A2CF8D1B7F185F0013AAD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D38B80D71B69D4E40097D5AC /* Build configuration list for PBXNativeTarget "sensor WatchKit Extension" */ = {
+		D3A2CF8E1B7F185F0013AAD2 /* Build configuration list for PBXNativeTarget "sensor WatchKit Extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D38B80D81B69D4E40097D5AC /* Debug */,
-				D38B80D91B69D4E40097D5AC /* Release */,
+				D3A2CF8F1B7F185F0013AAD2 /* Debug */,
+				D3A2CF901B7F185F0013AAD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D38B80DB1B69D4E40097D5AC /* Build configuration list for PBXNativeTarget "sensor WatchKit App" */ = {
+		D3A2CF921B7F185F0013AAD2 /* Build configuration list for PBXNativeTarget "sensor WatchKit App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D38B80DC1B69D4E40097D5AC /* Debug */,
-				D38B80DD1B69D4E40097D5AC /* Release */,
+				D3A2CF931B7F185F0013AAD2 /* Debug */,
+				D3A2CF941B7F185F0013AAD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D38B80DF1B69D4E40097D5AC /* Build configuration list for PBXNativeTarget "sensor" */ = {
+		D3A2CF961B7F185F0013AAD2 /* Build configuration list for PBXNativeTarget "sensor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D38B80E01B69D4E40097D5AC /* Debug */,
-				D38B80E11B69D4E40097D5AC /* Release */,
+				D3A2CF971B7F185F0013AAD2 /* Debug */,
+				D3A2CF981B7F185F0013AAD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D38B80E21B69D4E40097D5AC /* Build configuration list for PBXNativeTarget "sensorTests" */ = {
+		D3A2CF991B7F185F0013AAD2 /* Build configuration list for PBXNativeTarget "sensorTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D38B80E31B69D4E40097D5AC /* Debug */,
-				D38B80E41B69D4E40097D5AC /* Release */,
+				D3A2CF9A1B7F185F0013AAD2 /* Debug */,
+				D3A2CF9B1B7F185F0013AAD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D38B80E51B69D4E40097D5AC /* Build configuration list for PBXNativeTarget "sensorUITests" */ = {
+		D3A2CF9C1B7F185F0013AAD2 /* Build configuration list for PBXNativeTarget "sensorUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D38B80E61B69D4E40097D5AC /* Debug */,
-				D38B80E71B69D4E40097D5AC /* Release */,
+				D3A2CF9D1B7F185F0013AAD2 /* Debug */,
+				D3A2CF9E1B7F185F0013AAD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D38B80821B69D4E30097D5AC /* Project object */;
+	rootObject = D3A2CF391B7F185F0013AAD2 /* Project object */;
 }

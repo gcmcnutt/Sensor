@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D38B80891B69D4E30097D5AC"
+               BlueprintIdentifier = "D3A2CF401B7F185F0013AAD2"
                BuildableName = "sensor.app"
                BlueprintName = "sensor"
                ReferencedContainer = "container:sensor.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D38B809D1B69D4E30097D5AC"
+               BlueprintIdentifier = "D3A2CF541B7F185F0013AAD2"
                BuildableName = "sensorTests.xctest"
                BlueprintName = "sensorTests"
                ReferencedContainer = "container:sensor.xcodeproj">
@@ -42,7 +42,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D38B80A81B69D4E30097D5AC"
+               BlueprintIdentifier = "D3A2CF5F1B7F185F0013AAD2"
                BuildableName = "sensorUITests.xctest"
                BlueprintName = "sensorUITests"
                ReferencedContainer = "container:sensor.xcodeproj">
@@ -52,7 +52,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D38B80891B69D4E30097D5AC"
+            BlueprintIdentifier = "D3A2CF401B7F185F0013AAD2"
             BuildableName = "sensor.app"
             BlueprintName = "sensor"
             ReferencedContainer = "container:sensor.xcodeproj">
@@ -75,7 +75,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D38B80891B69D4E30097D5AC"
+            BlueprintIdentifier = "D3A2CF401B7F185F0013AAD2"
             BuildableName = "sensor.app"
             BlueprintName = "sensor"
             ReferencedContainer = "container:sensor.xcodeproj">
@@ -94,7 +94,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D38B80891B69D4E30097D5AC"
+            BlueprintIdentifier = "D3A2CF401B7F185F0013AAD2"
             BuildableName = "sensor.app"
             BlueprintName = "sensor"
             ReferencedContainer = "container:sensor.xcodeproj">
