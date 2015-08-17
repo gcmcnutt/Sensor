@@ -19,9 +19,7 @@ extension CMSensorDataList: SequenceType {
 }
 
 extension CMRecordedAccelerometerData {
-    public func csv() -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+    public func csv(dateFormatter : NSDateFormatter) -> String {
         let dateString = dateFormatter.stringFromDate(startDate)
         return "\(identifier),\(dateString),\(acceleration.x),\(acceleration.y),\(acceleration.z)"
     }
@@ -150,7 +148,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                 }
                 
                 // TODO temporary until WCSession serialization support
-                payloadBatch.append(lastElement.csv())
+                payloadBatch.append(lastElement.csv(dateFormatter))
             }
             
             // flush any data
