@@ -47,9 +47,9 @@ class ViewController: UIViewController {
             self.elementsVal.text = self.elementsCount.description
             self.lastBatchVal.text = lastItem[0]
             self.lastTimeVal.text = lastItem[1]
-            self.lastXVal.text = lastItem[3]
-            self.lastYVal.text = lastItem[4]
-            self.lastZVal.text = lastItem[5]
+            self.lastXVal.text = lastItem[2]
+            self.lastYVal.text = lastItem[3]
+            self.lastZVal.text = lastItem[4]
         }
     }
 }

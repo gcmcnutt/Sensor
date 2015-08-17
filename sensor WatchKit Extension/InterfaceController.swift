@@ -20,7 +20,10 @@ extension CMSensorDataList: SequenceType {
 
 extension CMRecordedAccelerometerData {
     public func csv() -> String {
-        return "\(identifier),\(startDate),\(timestamp),\(acceleration.x),\(acceleration.y),\(acceleration.z)"
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        let dateString = dateFormatter.stringFromDate(startDate)
+        return "\(identifier),\(dateString),\(acceleration.x),\(acceleration.y),\(acceleration.z)"
     }
 }
 
@@ -53,7 +56,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         super.awakeWithContext(context)
         
         // Configure interface objects here.
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'hh:mm:ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
         
         // can we record?
         self.startVal.setEnabled(CMSensorRecorder.isAccelerometerRecordingAvailable())
