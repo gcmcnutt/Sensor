@@ -114,22 +114,31 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         
         let data = sr.accelerometerDataFromDate(latestDate, toDate: NSDate())
         if (data != nil) {
-            var currentBatch : UInt64 = 0
             var payloadBatch : [String] = []
+            let lastBatchNum = batchNum
             
             for element in data! {
                 
                 let lastElement = element as! CMRecordedAccelerometerData
                 
+                // we skip prior batch numbers that may be returned
+                if (lastBatchNum != 0 && batchNum == lastElement.identifier) {
+                    continue
+                }
+                
+                // this is the batch we're working on
+                batchNum = lastElement.identifier
+                
                 // we only do one batch at a time
-                if (currentBatch != 0 && currentBatch != lastElement.identifier) {
+                if (batchNum != lastElement.identifier) {
                     break
                 }
-                currentBatch = lastElement.identifier
                 
                 // note that we really received an element
                 itemCount++;
                 haveData = true;
+                
+                // this tracks the query date for the next round...
                 latestDate = latestDate.laterDate(lastElement.startDate)
 
                 // next item, here we enqueue it
