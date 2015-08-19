@@ -73,22 +73,22 @@
                                 </label>
                             </items>
                         </group>
-                        <group width="134" height="11" alignment="left" id="94Y-AT-mGG">
-                            <items>
-                                <label alignment="left" text="batchNum" id="FIM-2O-htH">
-                                    <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
-                                </label>
-                                <label alignment="right" text="0" id="K7E-ZR-nfV">
-                                    <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
-                                </label>
-                            </items>
-                        </group>
                         <group width="134" height="11" alignment="left" id="KaP-gl-Sb0">
                             <items>
                                 <label alignment="left" text="itemCount" id="ukg-6e-kD5">
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
                                 <label alignment="right" text="0" id="mBV-PB-Obv">
+                                    <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="134" height="11" alignment="left" id="94Y-AT-mGG">
+                            <items>
+                                <label alignment="left" text="batchNum" id="FIM-2O-htH">
+                                    <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
+                                </label>
+                                <label alignment="right" text="0" id="K7E-ZR-nfV">
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
                             </items>
