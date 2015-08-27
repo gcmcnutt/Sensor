@@ -14,11 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
     var window: UIWindow?
     var viewController : ViewController!
+    var infoPlist : NSDictionary!
 
     let wcsession = WCSession.defaultSession()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")!
+        infoPlist = NSDictionary(contentsOfFile: path)
         
         // wake up session to watch
         wcsession.delegate = self
@@ -26,7 +30,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
         viewController = self.window?.rootViewController as! ViewController
         
+        // set up Cognito
+        //AWSLogger.defaultLogger().logLevel = .Verbose
+        
+        let credentialsProvider = AWSCognitoCredentialsProvider(
+            regionType: AWSRegionType.USEast1, identityPoolId: infoPlist[AppGlobals.IDENTITY_POOL_ID_KEY] as! String)
+                    
+        let defaultServiceConfiguration = AWSServiceConfiguration(
+            region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+        
+        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = defaultServiceConfiguration
+        
         return true
+    }
+
+    func application(application: UIApplication, openURL: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        // Pass on the url to the SDK to parse authorization code from the url.
+        let isValidRedirectSignInURL = AIMobileLib.handleOpenURL(openURL, sourceApplication: sourceApplication)
+        
+        return isValidRedirectSignInURL
     }
 
     func applicationWillResignActive(application: UIApplication) {

@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>kinesisStream</key>
+	<string>sensor</string>
+	<key>cognitoPool</key>
+	<string>us-east-1:a2484271-fa22-4544-882d-fb71de194251</string>
+	<key>APIKey</key>
+	<string>eyJhbGciOiJSU0EtU0hBMjU2IiwidmVyIjoiMSJ9.eyJ2ZXIiOiIzIiwiZW5kcG9pbnRzIjp7ImF1dGh6IjoiaHR0cHM6Ly93d3cuYW1hem9uLmNvbS9hcC9vYSIsInRva2VuRXhjaGFuZ2UiOiJodHRwczovL2FwaS5hbWF6b24uY29tL2F1dGgvbzIvdG9rZW4ifSwiY2xpZW50SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi1vYTItY2xpZW50LjNlMjEzNDFlNzU5MTQ1YmZhZGI0MWJjNGEzMjNkNmMyIiwiYXBwRmFtaWx5SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi4wMTNhNmJlNjk1NWI0YmQ3YTFlNTgxODgwNDM5ZGZjZSIsImJ1bmRsZVNlZWRJZCI6ImNvbS5hY2NlbGVyby5zZW5zb3IiLCJidW5kbGVJZCI6ImNvbS5hY2NlbGVyby5zZW5zb3IiLCJpc3MiOiJBbWF6b24iLCJ0eXBlIjoiQVBJS2V5IiwiYXBwVmFyaWFudElkIjoiYW16bjEuYXBwbGljYXRpb24tY2xpZW50LjlhYWZlZjU5OGUyMjRhMjM5YjFkYjNkOTAzY2MyMWI0IiwidHJ1c3RQb29sIjpudWxsLCJhcHBJZCI6ImFtem4xLmFwcGxpY2F0aW9uLWNsaWVudC45YWFmZWY1OThlMjI0YTIzOWIxZGIzZDkwM2NjMjFiNCIsImlkIjoiOTI3YjE1OWUtNDllMC0xMWU1LWI1ZjMtMzNiMzgyZWQ1ODNkIiwiaWF0IjoiMTQ0MDM2NjQ1ODQwMCJ9.onJBwPbjFotAKzlyTzn8dTv5pV3evbkfWUvV2oZZSOHqp4qU1+yAD+l/rRrR7fYwxmtbxpz54AT2MLemejAnViU+MNKwVslxCo54mEaKch/dUZ4Uv98fKj+6SzGad2ba8DCRAcu/a+Sq2Rd6s0cm3JjH9+rrHSj43BbPnLj11MSa0wSCmA97FRofHgmg06OkIb7DM2w2sjmZIWX4p0i7gX+pGnrawApo5WP24/6MdLYYMWiiS1uZEfwrfZjxS1Zm/IeXGSz5nYyoQsjUaSz93T62OtMTx1TdenD6TKhF0FTu+S7qa2eERD3SzYxrpUAw9Qx/TmsBRLIxDz3ZWHgJNg==</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -18,10 +24,26 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.accelero.$(PRODUCT_NAME:rfc1034identifier)</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>amzn-com.accelero.$(PRODUCT_NAME:rfc1034identifier)</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -26,6 +26,10 @@ extension CMRecordedAccelerometerData {
 }
 
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
+    static let MAX_PAYLOAD_COUNT = 200
+    static let FAST_POLL_DELAY_SEC = 0.1
+    static let SLOW_POLL_DELAY_SEC = 5.0
+    
     let wcsession = WCSession.defaultSession()
     let sr = CMSensorRecorder()
     let dateFormatter = NSDateFormatter()
@@ -41,6 +45,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     var itemCount = 0
     var latestDate = NSDate.distantPast()
     var queueDepth = 0
+    
+    var haveAccelerometer : Bool!
     
     @IBOutlet var durationVal: WKInterfaceLabel!
     @IBOutlet var startVal: WKInterfaceButton!
@@ -59,8 +65,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         summaryDateFormatter.dateFormat = "HH:mm:ss.SSS"
         
         // can we record?
-        self.startVal.setEnabled(CMSensorRecorder.isAccelerometerRecordingAvailable())
-        self.lastStartVal.setText(summaryDateFormatter.stringFromDate(lastStart))
+        haveAccelerometer = CMSensorRecorder.isAccelerometerRecordingAvailable()
+        startVal.setEnabled(haveAccelerometer)
+        lastStartVal.setText(summaryDateFormatter.stringFromDate(lastStart))
         
         // wake up session to phone
         wcsession.delegate = self
@@ -98,62 +105,71 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         manageDequeuerTimer(true)
     }
     
-    func manageDequeuerTimer(fast : Bool) {
+    func manageDequeuerTimer(slow : Bool) {
         if (dequeuerState) {
-            timer = NSTimer.scheduledTimerWithTimeInterval(fast ? 0.1 : 5.0,
+            timer = NSTimer.scheduledTimerWithTimeInterval(slow ? InterfaceController.SLOW_POLL_DELAY_SEC : InterfaceController.FAST_POLL_DELAY_SEC,
                 target: self,
-                selector: "dequeuerTimer:",
-                userInfo: nil,
+                selector: "timerHandler:",
+                userInfo: haveAccelerometer,
                 repeats: false)
         } else {
             timer.invalidate()
         }
     }
     
-    func dequeuerTimer(timer : NSTimer) {
-        var haveData = false
-        
+    func timerHandler(timer : NSTimer) {
+        var payloadBatch : [String] = []
+
         cmdCount++
         
-        let data = sr.accelerometerDataFromDate(latestDate, toDate: NSDate())
-        if (data != nil) {
-            var payloadBatch : [String] = []
-            
-            for element in data! {
+        // real or faking it?
+        if (timer.userInfo as! Bool) {
+            let data = sr.accelerometerDataFromDate(latestDate, toDate: NSDate())
+            if (data != nil) {
                 
-                let lastElement = element as! CMRecordedAccelerometerData
-                
-                // skip repeated element from prior batch
-                if (!(lastElement.startDate.compare(latestDate) == NSComparisonResult.OrderedDescending)) {
-                    continue;
-                }
-                
-                // note that we really received an element
-                itemCount++;
-                haveData = true;
-                
-                // this tracks the query date for the next round...
-                latestDate = latestDate.laterDate(lastElement.startDate)
-                
-                batchNum = lastElement.identifier
-                
-                // next item, here we enqueue it
-                if (lastElement.startDate.compare(NSDate.distantPast()) == NSComparisonResult.OrderedAscending) {
-                    NSLog("odd date: " + lastElement.description)
-                }
-                
-                // TODO temporary until WCSession serialization support
-                payloadBatch.append(lastElement.csv(dateFormatter))
-                
-                if (payloadBatch.count >= 200) {
-                    break
+                for element in data! {
+                    
+                    let lastElement = element as! CMRecordedAccelerometerData
+                    
+                    // skip repeated element from prior batch
+                    if (!(lastElement.startDate.compare(latestDate) == NSComparisonResult.OrderedDescending)) {
+                        continue;
+                    }
+                    
+                    // note that we really received an element
+                    itemCount++;
+                    
+                    // this tracks the query date for the next round...
+                    latestDate = latestDate.laterDate(lastElement.startDate)
+                    
+                    batchNum = lastElement.identifier
+                    
+                    // next item, here we enqueue it
+                    if (lastElement.startDate.compare(NSDate.distantPast()) == NSComparisonResult.OrderedAscending) {
+                        NSLog("odd date: " + lastElement.description)
+                    }
+                    
+                    // TODO temporary until WCSession serialization support
+                    payloadBatch.append(lastElement.csv(dateFormatter))
+                    
+                    if (payloadBatch.count >= InterfaceController.MAX_PAYLOAD_COUNT) {
+                        break
+                    }
                 }
             }
-            
-            // flush any data
-            if (!payloadBatch.isEmpty) {
-                self.wcsession.transferUserInfo(["data" : payloadBatch]) as WCSessionUserInfoTransfer?
+        } else {
+            batchNum++
+            while (payloadBatch.count < InterfaceController.MAX_PAYLOAD_COUNT && latestDate.compare(NSDate()) == NSComparisonResult.OrderedAscending) {
+                let dateString = dateFormatter.stringFromDate(latestDate)
+                payloadBatch.append("\(cmdCount),\(dateString),0.0,0.1,0.2")
+                itemCount++
+                latestDate = latestDate.dateByAddingTimeInterval(0.02)
             }
+        }
+        
+        // flush any data
+        if (!payloadBatch.isEmpty) {
+            self.wcsession.transferUserInfo([AppGlobals.ACCELEROMETER_KEY : payloadBatch])
         }
         
         // update the UI
@@ -164,8 +180,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             self.latestVal.setText(self.summaryDateFormatter.stringFromDate(self.latestDate))
             self.queueDepthVal.setText(self.wcsession.outstandingUserInfoTransfers.count.description)
             
-            // reset the timer
-            self.manageDequeuerTimer(haveData)
+            // reset the timer -- slow poll if not full buffer
+            self.manageDequeuerTimer(payloadBatch.count < InterfaceController.MAX_PAYLOAD_COUNT)
         }
     }
     

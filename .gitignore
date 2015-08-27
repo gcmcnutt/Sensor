@@ -1,2 +1,8 @@
 *.xcuserstate
+*/xcuserdata
+*.xcworkspace
 *.xcbkplist
+Pods
+Podfile.lock
+.DS_Store
+
