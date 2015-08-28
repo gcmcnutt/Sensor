@@ -11,6 +11,12 @@ import WatchConnectivity
 
 class ViewController: UIViewController {
     
+    // how long until flush?
+    static let KINESIS_FLUSH_DELAY_SEC : Double = 30.0
+    
+    // how close to expiration should we refresh STS token?
+    static let CREDENTIAL_REFRESH_WINDOW_SEC : Double = -200.0
+    
     @IBOutlet weak var nameVal: UILabel!
     @IBOutlet weak var emailVal: UILabel!
     @IBOutlet weak var idVal: UILabel!
@@ -43,6 +49,8 @@ class ViewController: UIViewController {
     var gapErrors = 0
     var lastDate = NSDate.distantPast()
     var lastItem = ""
+    var flushTimer : NSTimer!
+    let lockQueue = dispatch_queue_create("com.accelero.kinesisTaskQueue", nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,18 +110,19 @@ class ViewController: UIViewController {
         }
         
         let data = try! NSJSONSerialization.dataWithJSONObject(payload, options: NSJSONWritingOptions.PrettyPrinted)
-        tasks.append(kinesis.saveRecord(data, streamName: appDelegate.infoPlist[AppGlobals.KINESIS_STREAM_KEY] as! String))
         
-        // TODO add a idle flush timer
-        if (NSDate().timeIntervalSinceDate(timeLastFlush) > 30) {
+        dispatch_sync(lockQueue) {
+            tasks.append(self.kinesis.saveRecord(data, streamName: self.appDelegate.infoPlist[AppGlobals.KINESIS_STREAM_KEY] as! String))
             
-            // dump the data
-            AWSTask(forCompletionOfAllTasks: tasks).continueWithSuccessBlock{
-                (task: AWSTask!) -> AWSTask! in
-                return self.kinesis.submitAllRecords()
+            if (self.flushTimer == nil) {
+                self.flushTimer = NSTimer.scheduledTimerWithTimeInterval(ViewController.KINESIS_FLUSH_DELAY_SEC,
+                    target: self,
+                    selector: "flushHandler:",
+                    userInfo: tasks,
+                    repeats: false)
             }
-            timeLastFlush = NSDate()
-            flushCount++
+            
+            // TODO lazy monitor on forced flush on size of data queued
         }
         
         // render the last item
@@ -126,6 +135,35 @@ class ViewController: UIViewController {
             self.lastYVal.text = elements[3]
             self.lastZVal.text = elements[4]
             self.gapErrorsVal.text = self.gapErrors.description
+        }
+        updateKinesisState()
+    }
+    
+    func flushHandler(timer : NSTimer) {
+        dispatch_sync(lockQueue) {
+            
+            let tasks = timer.userInfo as! [AWSTask]
+            
+            AWSTask(forCompletionOfAllTasks: tasks).continueWithSuccessBlock {
+                (task: AWSTask!) -> AWSTask! in
+                
+                // TODO eventually remove this manual refresh of the token if near
+                if (self.credentialsProvider.expiration == nil ||
+                    NSDate().timeIntervalSinceDate(self.credentialsProvider.expiration) > ViewController.CREDENTIAL_REFRESH_WINDOW_SEC) {
+                        self.credentialsProvider.refresh().waitUntilFinished()
+                }
+                self.flushCount++
+                self.timeLastFlush = NSDate()
+                return self.kinesis.submitAllRecords()
+            }
+            
+            self.flushTimer = nil
+        }
+        updateKinesisState()
+    }
+    
+    private func updateKinesisState() {
+        NSOperationQueue.mainQueue().addOperationWithBlock() {
             self.localStorageVal.text = self.kinesis.diskBytesUsed.description
             self.flushCountVal.text = self.flushCount.description
             self.lastFlushTimeVal.text = self.dateFormatter.stringFromDate(self.timeLastFlush)

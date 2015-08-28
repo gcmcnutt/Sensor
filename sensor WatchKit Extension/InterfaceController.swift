@@ -27,15 +27,15 @@ extension CMRecordedAccelerometerData {
 
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
     static let MAX_PAYLOAD_COUNT = 200
-    static let FAST_POLL_DELAY_SEC = 0.1
-    static let SLOW_POLL_DELAY_SEC = 5.0
+    static let FAST_POLL_DELAY_SEC = 0.01
+    static let SLOW_POLL_DELAY_SEC = 4.0
     
     let wcsession = WCSession.defaultSession()
     let sr = CMSensorRecorder()
     let dateFormatter = NSDateFormatter()
     let summaryDateFormatter = NSDateFormatter()
     
-    var durationValue = 2.0
+    var durationValue = 5.0
     var lastStart = NSDate()
     var timer = NSTimer()
     var dequeuerState = false

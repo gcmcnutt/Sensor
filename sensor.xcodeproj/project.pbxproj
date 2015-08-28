@@ -388,6 +388,11 @@
 					D3A2CF401B7F185F0013AAD2 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = ZFJ4RM7VL4;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 					D3A2CF541B7F185F0013AAD2 = {
 						CreatedOnToolsVersion = 7.0;
