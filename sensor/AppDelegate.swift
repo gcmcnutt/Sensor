@@ -73,10 +73,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
         
         NSOperationQueue.mainQueue().addOperationWithBlock() {
-            self.viewController.renderNewData(userInfo)
+            self.viewController.renderNewData(message)
         }
     }
 }

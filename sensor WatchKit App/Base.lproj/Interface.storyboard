@@ -20,6 +20,8 @@
             <string>Courier</string>
             <string>Courier</string>
             <string>Courier</string>
+            <string>Courier</string>
+            <string>Courier</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -105,10 +107,24 @@
                         </group>
                         <group width="134" height="11" alignment="left" id="GlE-pW-4Dd">
                             <items>
-                                <label alignment="left" text="queueDepth" id="vyk-Of-t10">
+                                <label alignment="left" text="errors" id="vyk-Of-t10">
+                                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
                                 <label alignment="right" text="0" id="j0n-bp-Fk9">
+                                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="134" height="11" alignment="left" id="lgp-m5-GBj">
+                            <items>
+                                <label alignment="left" text="last" id="5dC-FX-QRc">
+                                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
+                                </label>
+                                <label alignment="right" id="Wj7-xO-2eL">
+                                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
                             </items>
@@ -118,10 +134,11 @@
                         <outlet property="batchNumVal" destination="K7E-ZR-nfV" id="gHO-hl-QQu"/>
                         <outlet property="cmdCountVal" destination="yWr-hT-7hV" id="5uT-s4-oWs"/>
                         <outlet property="durationVal" destination="sN8-CB-pgp" id="DD4-us-MCb"/>
+                        <outlet property="errorsVal" destination="j0n-bp-Fk9" id="3Dt-35-OqZ"/>
                         <outlet property="itemCountVal" destination="mBV-PB-Obv" id="cGf-VV-llG"/>
                         <outlet property="lastStartVal" destination="eie-mm-71m" id="1L5-qr-W3F"/>
+                        <outlet property="lastVal" destination="Wj7-xO-2eL" id="cN3-sC-NEf"/>
                         <outlet property="latestVal" destination="spF-Gg-Mps" id="dnD-J3-E6L"/>
-                        <outlet property="queueDepthVal" destination="j0n-bp-Fk9" id="Tnl-RH-9Nv"/>
                         <outlet property="startVal" destination="rb7-sH-WxW" id="yeV-Fo-r6B"/>
                     </connections>
                 </controller>

@@ -44,7 +44,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     var batchNum : UInt64 = 0
     var itemCount = 0
     var latestDate = NSDate.distantPast()
-    var queueDepth = 0
+    var errors = 0
     
     var haveAccelerometer : Bool!
     
@@ -55,7 +55,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBOutlet var batchNumVal: WKInterfaceLabel!
     @IBOutlet var itemCountVal: WKInterfaceLabel!
     @IBOutlet var latestVal: WKInterfaceLabel!
-    @IBOutlet var queueDepthVal: WKInterfaceLabel!
+    @IBOutlet var errorsVal: WKInterfaceLabel!
+    @IBOutlet var lastVal: WKInterfaceLabel!
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -121,6 +122,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         var payloadBatch : [String] = []
 
         cmdCount++
+        NSLog("timerHander(\(cmdCount))")
         
         // real or faking it?
         if (timer.userInfo as! Bool) {
@@ -169,7 +171,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         
         // flush any data
         if (!payloadBatch.isEmpty) {
-            self.wcsession.transferUserInfo([AppGlobals.ACCELEROMETER_KEY : payloadBatch])
+            self.wcsession.sendMessage([AppGlobals.ACCELEROMETER_KEY : payloadBatch],
+                replyHandler: nil,
+                errorHandler: sendError)
         }
         
         // update the UI
@@ -178,16 +182,19 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             self.batchNumVal.setText(self.batchNum.description)
             self.itemCountVal.setText(self.itemCount.description)
             self.latestVal.setText(self.summaryDateFormatter.stringFromDate(self.latestDate))
-            self.queueDepthVal.setText(self.wcsession.outstandingUserInfoTransfers.count.description)
-            
+
             // reset the timer -- slow poll if not full buffer
             self.manageDequeuerTimer(payloadBatch.count < InterfaceController.MAX_PAYLOAD_COUNT)
         }
     }
     
-    func session(session: WCSession, didFinishUserInfoTransfer userInfoTransfer: WCSessionUserInfoTransfer, error: NSError?) {
-        if (error != nil) {
-            NSLog(error!.description)
+    func sendError(error : NSError) {
+        errors++
+        NSOperationQueue.mainQueue().addOperationWithBlock() {
+            self.errorsVal.setText(self.errors.description)
+            self.lastVal.setText(error.description)
         }
+        
+        NSLog("sendError(\(error))")
     }
 }

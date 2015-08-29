@@ -89,6 +89,7 @@ class ViewController: UIViewController {
     
     func renderNewData(userInfo: [String : AnyObject]) {
         batchesCount++
+        NSLog("renderNewData(\(batchesCount))")
         let payload = userInfo[AppGlobals.ACCELEROMETER_KEY] as! [String]
         var elements : [String] = []
         var tasks : [AWSTask] = []
@@ -141,6 +142,8 @@ class ViewController: UIViewController {
     
     func flushHandler(timer : NSTimer) {
         dispatch_sync(lockQueue) {
+            self.flushCount++
+            NSLog("flushHandler(\(self.flushCount))")
             
             let tasks = timer.userInfo as! [AWSTask]
             
@@ -150,9 +153,8 @@ class ViewController: UIViewController {
                 // TODO eventually remove this manual refresh of the token if near
                 if (self.credentialsProvider.expiration == nil ||
                     NSDate().timeIntervalSinceDate(self.credentialsProvider.expiration) > ViewController.CREDENTIAL_REFRESH_WINDOW_SEC) {
-                        self.credentialsProvider.refresh().waitUntilFinished()
+                        self.credentialsProvider.refresh()
                 }
-                self.flushCount++
                 self.timeLastFlush = NSDate()
                 return self.kinesis.submitAllRecords()
             }
