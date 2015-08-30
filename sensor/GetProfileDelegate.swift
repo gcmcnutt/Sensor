@@ -20,11 +20,12 @@ class GetProfileDelegate: NSObject, AIAuthenticationDelegate {
         // Get profile request succeded. Unpack the profile information
         // and pass it to the parent view controller
         
-        let dict = apiResult.result as? NSDictionary
-        parentController.nameVal.text = dict!.valueForKey("name") as? String
-        parentController.emailVal.text = dict!.valueForKey("email") as? String
-        parentController.idVal.text = dict!.valueForKey("user_id") as? String
-        parentController.postalVal.text = dict!.valueForKey("postal_code") as? String
+        let dict = apiResult.result as! NSDictionary
+        parentController.updateLoginState(
+            dict.valueForKey("name") as! String,
+            email: dict.valueForKey("email") as! String,
+            userId: dict.valueForKey("user_id") as! String,
+            postal: dict.valueForKey("postal_code") as! String)
     }
     
     @objc func requestDidFail(errorResponse: APIError) {

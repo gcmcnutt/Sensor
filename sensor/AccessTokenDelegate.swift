@@ -19,8 +19,8 @@ class AccessTokenDelegate: NSObject, AIAuthenticationDelegate {
     @objc func requestDidSucceed(apiResult: APIResult!) {
         let token = apiResult.result as! String
         
-        self.parentController.credentialsProvider = AWSServiceManager.defaultServiceManager().defaultServiceConfiguration.credentialsProvider as! AWSCognitoCredentialsProvider
-        self.parentController.credentialsProvider.logins = [ "www.amazon.com": token ]
+        let credentialsProvider = AWSServiceManager.defaultServiceManager().defaultServiceConfiguration.credentialsProvider as! AWSCognitoCredentialsProvider
+        credentialsProvider.logins = [ "www.amazon.com": token ]
         
         // Load new view controller with user identifying information
         // as the user is now successfully logged in.
