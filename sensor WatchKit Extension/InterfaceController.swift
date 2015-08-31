@@ -45,7 +45,12 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     var itemCount = 0
     var latestDate = NSDate.distantPast()
     var errors = 0
-    
+
+    var payloadBatch : [String] = []
+    var newItems = 0
+    var newLatestDate : NSDate!
+    var newBatchNum : UInt64!
+
     var haveAccelerometer : Bool!
     
     @IBOutlet var durationVal: WKInterfaceLabel!
@@ -111,7 +116,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             timer = NSTimer.scheduledTimerWithTimeInterval(slow ? InterfaceController.SLOW_POLL_DELAY_SEC : InterfaceController.FAST_POLL_DELAY_SEC,
                 target: self,
                 selector: "timerHandler:",
-                userInfo: haveAccelerometer,
+                userInfo: nil,
                 repeats: false)
         } else {
             timer.invalidate()
@@ -119,14 +124,18 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     func timerHandler(timer : NSTimer) {
-        var payloadBatch : [String] = []
-
+        
         cmdCount++
         NSLog("timerHander(\(cmdCount))")
         
+        payloadBatch = []
+        newItems = itemCount
+        newLatestDate = latestDate
+        newBatchNum = batchNum
+        
         // real or faking it?
-        if (timer.userInfo as! Bool) {
-            let data = sr.accelerometerDataFromDate(latestDate, toDate: NSDate())
+        if (haveAccelerometer!) {
+            let data = sr.accelerometerDataFromDate(newLatestDate, toDate: NSDate())
             if (data != nil) {
                 
                 for element in data! {
@@ -134,17 +143,17 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                     let lastElement = element as! CMRecordedAccelerometerData
                     
                     // skip repeated element from prior batch
-                    if (!(lastElement.startDate.compare(latestDate) == NSComparisonResult.OrderedDescending)) {
+                    if (!(lastElement.startDate.compare(newLatestDate) == NSComparisonResult.OrderedDescending)) {
                         continue;
                     }
                     
                     // note that we really received an element
-                    itemCount++;
+                    newItems++;
                     
                     // this tracks the query date for the next round...
-                    latestDate = latestDate.laterDate(lastElement.startDate)
+                    newLatestDate = newLatestDate.laterDate(lastElement.startDate)
                     
-                    batchNum = lastElement.identifier
+                    newBatchNum = lastElement.identifier
                     
                     // next item, here we enqueue it
                     if (lastElement.startDate.compare(NSDate.distantPast()) == NSComparisonResult.OrderedAscending) {
@@ -160,41 +169,59 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                 }
             }
         } else {
-            batchNum++
-            while (payloadBatch.count < InterfaceController.MAX_PAYLOAD_COUNT && latestDate.compare(NSDate()) == NSComparisonResult.OrderedAscending) {
-                let dateString = dateFormatter.stringFromDate(latestDate)
+            newBatchNum = batchNum + 1
+            while (payloadBatch.count < InterfaceController.MAX_PAYLOAD_COUNT && newLatestDate.compare(NSDate()) == NSComparisonResult.OrderedAscending) {
+                let dateString = dateFormatter.stringFromDate(newLatestDate)
                 payloadBatch.append("\(cmdCount),\(dateString),0.0,0.1,0.2")
-                itemCount++
-                latestDate = latestDate.dateByAddingTimeInterval(0.02)
+                newItems++
+                newLatestDate = newLatestDate.dateByAddingTimeInterval(0.02)
             }
         }
         
         // flush any data
         if (!payloadBatch.isEmpty) {
-            self.wcsession.sendMessage([AppGlobals.ACCELEROMETER_KEY : payloadBatch],
-                replyHandler: nil,
+            self.wcsession.sendMessage(
+                [AppGlobals.ACCELEROMETER_KEY : payloadBatch],
+                replyHandler: sendSuccess,
                 errorHandler: sendError)
-        }
-        
-        // update the UI
-        NSOperationQueue.mainQueue().addOperationWithBlock() {
-            self.cmdCountVal.setText(self.cmdCount.description)
-            self.batchNumVal.setText(self.batchNum.description)
-            self.itemCountVal.setText(self.itemCount.description)
-            self.latestVal.setText(self.summaryDateFormatter.stringFromDate(self.latestDate))
-
-            // reset the timer -- slow poll if not full buffer
-            self.manageDequeuerTimer(payloadBatch.count < InterfaceController.MAX_PAYLOAD_COUNT)
+        } else {
+            // no data, do a slow poll
+            updateUI(true)
         }
     }
     
+    func sendSuccess(reply : [String : AnyObject]) {
+        // commit the updates on success
+        batchNum = newBatchNum
+        latestDate = newLatestDate
+        itemCount = newItems
+        
+        // reset UI and try again
+        updateUI(payloadBatch.count < InterfaceController.MAX_PAYLOAD_COUNT)
+    }
+    
+    
     func sendError(error : NSError) {
         errors++
+        NSLog("sendError[\(errors)](\(error))")
+
         NSOperationQueue.mainQueue().addOperationWithBlock() {
             self.errorsVal.setText(self.errors.description)
             self.lastVal.setText(error.description)
         }
         
-        NSLog("sendError(\(error))")
+        updateUI(true)
+    }
+    
+    func updateUI(slow : Bool) {
+        NSOperationQueue.mainQueue().addOperationWithBlock() {
+            self.cmdCountVal.setText(self.cmdCount.description)
+            self.batchNumVal.setText(self.batchNum.description)
+            self.itemCountVal.setText(self.itemCount.description)
+            self.latestVal.setText(self.summaryDateFormatter.stringFromDate(self.latestDate))
+            
+            // reset the timer -- slow poll if not full buffer
+            self.manageDequeuerTimer(slow)
+        }
     }
 }

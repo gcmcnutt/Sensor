@@ -117,13 +117,13 @@
                                 </label>
                             </items>
                         </group>
-                        <group width="134" height="11" alignment="left" id="lgp-m5-GBj">
+                        <group width="134" height="35" alignment="left" id="lgp-m5-GBj">
                             <items>
                                 <label alignment="left" text="last" id="5dC-FX-QRc">
                                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
-                                <label alignment="right" id="Wj7-xO-2eL">
+                                <label width="112" height="37" alignment="right" textAlignment="right" numberOfLines="3" id="Wj7-xO-2eL">
                                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="font" name="Courier" family="Courier" pointSize="9"/>
                                 </label>
@@ -143,7 +143,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="235" y="362"/>
+            <point key="canvasLocation" x="235" y="373.5"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">

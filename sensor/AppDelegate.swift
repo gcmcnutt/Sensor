@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         infoPlist = NSDictionary(contentsOfFile: path)
         
         viewController = self.window?.rootViewController as! ViewController
-
+        
         // set up Cognito
         //AWSLogger.defaultLogger().logLevel = .Verbose
         
@@ -71,10 +71,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         let delegate = AuthorizeUserDelegate(parentController: viewController)
         delegate.launchGetAccessToken()
         
-        // wake up session to watch (ASSUMES no early phone->watch messages...)
+        // lastly, wake up session to watch
         wcsession.delegate = self
         wcsession.activateSession()
-
+        
         return true
     }
     
@@ -107,7 +107,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject],
+        replyHandler: ([String : AnyObject]) -> Void) {
         batchesCount++
         NSLog("receiveBatch(\(batchesCount))")
         let payload = message[AppGlobals.ACCELEROMETER_KEY] as! [String]
@@ -149,6 +150,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         
         viewController.updateSensorState(self, elements: elements)
         viewController.updateKinesisState(self)
+        
+        replyHandler(NSDictionary() as! [String : AnyObject])
     }
     
     func flushHandler(timer : NSTimer) {
@@ -157,7 +160,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         
         dispatch_sync(lockQueue) {
             
-            AWSTask(forCompletionOfAllTasks: self.tasks).continueWithSuccessBlock {
+            let result = AWSTask(forCompletionOfAllTasks: self.tasks).continueWithSuccessBlock {
                 (task: AWSTask!) -> AWSTask! in
                 
                 self.tasks = []
@@ -166,11 +169,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
                 // TODO eventually remove this manual refresh of the token if near
                 if (self.credentialsProvider.expiration == nil ||
                     self.credentialsProvider.expiration.timeIntervalSinceNow < AppDelegate.CREDENTIAL_REFRESH_WINDOW_SEC) {
+                        NSLog("refreshAWSCredentials")
                         self.credentialsProvider.refresh()
                 }
                 
                 self.timeLastFlush = NSDate()
                 return self.kinesis.submitAllRecords()
+            }
+            if (result.error != nil) {
+                NSLog("flushHandler error:\(result.error)")
             }
         }
         viewController.updateKinesisState(self)
