@@ -60,15 +60,15 @@ class ViewController: UIViewController {
         }
     }
     
-    func updateSensorState(appDelegate : AppDelegate, elements : [String]) {
+    func updateSensorState(appDelegate : AppDelegate, lastItem : AccelerometerData) {
         NSOperationQueue.mainQueue().addOperationWithBlock() {
             self.batchesVal.text = appDelegate.batchesCount.description
             self.elementsVal.text = appDelegate.elementsCount.description
-            self.lastBatchVal.text = elements[0]
-            self.lastTimeVal.text = elements[1]
-            self.lastXVal.text = elements[2]
-            self.lastYVal.text = elements[3]
-            self.lastZVal.text = elements[4]
+            self.lastBatchVal.text = lastItem.id.description
+            self.lastTimeVal.text = appDelegate.dateFormatter.stringFromDate(lastItem.timeStamp)
+            self.lastXVal.text = lastItem.x.description
+            self.lastYVal.text = lastItem.y.description
+            self.lastZVal.text = lastItem.z.description
             self.gapErrorsVal.text = appDelegate.gapErrors.description
         }
     }

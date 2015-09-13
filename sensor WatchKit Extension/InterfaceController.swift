@@ -18,13 +18,6 @@ extension CMSensorDataList: SequenceType {
     }
 }
 
-extension CMRecordedAccelerometerData {
-    public func csv(dateFormatter : NSDateFormatter) -> String {
-        let dateString = dateFormatter.stringFromDate(startDate)
-        return "\(identifier),\(dateString),\(acceleration.x),\(acceleration.y),\(acceleration.z)"
-    }
-}
-
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
     static let MAX_PAYLOAD_COUNT = 200
     static let FAST_POLL_DELAY_SEC = 0.01
@@ -40,17 +33,17 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     var timer = NSTimer()
     var dequeuerState = false
     
-    var cmdCount = 0
+    var cmdCount : UInt64 = 0
     var batchNum : UInt64 = 0
     var itemCount = 0
     var latestDate = NSDate.distantPast()
     var errors = 0
-
-    var payloadBatch : [String] = []
+    
+    var payloadBatch : [NSDictionary] = []
     var newItems = 0
     var newLatestDate : NSDate!
     var newBatchNum : UInt64!
-
+    
     var haveAccelerometer : Bool!
     
     @IBOutlet var durationVal: WKInterfaceLabel!
@@ -67,11 +60,11 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         super.awakeWithContext(context)
         
         // Configure interface objects here.
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        dateFormatter.dateFormat = AppGlobals.ISO8601_FORMAT
         summaryDateFormatter.dateFormat = "HH:mm:ss.SSS"
         
         // can we record?
-        haveAccelerometer = CMSensorRecorder.isAccelerometerRecordingAvailable()
+        haveAccelerometer = false//CMSensorRecorder.isAccelerometerRecordingAvailable()
         startVal.setEnabled(haveAccelerometer)
         lastStartVal.setText(summaryDateFormatter.stringFromDate(lastStart))
         
@@ -124,7 +117,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     func timerHandler(timer : NSTimer) {
-        
         cmdCount++
         NSLog("timerHander(\(cmdCount))")
         
@@ -160,8 +152,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                         NSLog("odd date: " + lastElement.description)
                     }
                     
-                    // TODO temporary until WCSession serialization support
-                    payloadBatch.append(lastElement.csv(dateFormatter))
+                    payloadBatch.append(AccelerometerData(dateFormatter: dateFormatter, data: lastElement).element)
                     
                     if (payloadBatch.count >= InterfaceController.MAX_PAYLOAD_COUNT) {
                         break
@@ -171,17 +162,24 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         } else {
             newBatchNum = batchNum + 1
             while (payloadBatch.count < InterfaceController.MAX_PAYLOAD_COUNT && newLatestDate.compare(NSDate()) == NSComparisonResult.OrderedAscending) {
-                let dateString = dateFormatter.stringFromDate(newLatestDate)
-                payloadBatch.append("\(cmdCount),\(dateString),0.0,0.1,0.2")
+                
+                let data = AccelerometerData(dateFormatter: dateFormatter, id: cmdCount, date: newLatestDate, x: 0.0, y: 0.1, z: 0.2)
+                
                 newItems++
                 newLatestDate = newLatestDate.dateByAddingTimeInterval(0.02)
+                
+                payloadBatch.append(data.element)
             }
         }
         
         // flush any data
         if (!payloadBatch.isEmpty) {
+            
+            let output = try! NSJSONSerialization.dataWithJSONObject(payloadBatch,
+                options: NSJSONWritingOptions.PrettyPrinted)
+            
             self.wcsession.sendMessage(
-                [AppGlobals.ACCELEROMETER_KEY : payloadBatch],
+                [AppGlobals.ACCELEROMETER_KEY : output],
                 replyHandler: sendSuccess,
                 errorHandler: sendError)
         } else {
@@ -204,7 +202,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     func sendError(error : NSError) {
         errors++
         NSLog("sendError[\(errors)](\(error))")
-
+        
         NSOperationQueue.mainQueue().addOperationWithBlock() {
             self.errorsVal.setText(self.errors.description)
             self.lastVal.setText(error.description)

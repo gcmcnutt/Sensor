@@ -17,4 +17,6 @@ class AppGlobals {
     
     // key for the stream name
     static let KINESIS_STREAM_KEY = "kinesisStream"
+    
+    static let ISO8601_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
 }

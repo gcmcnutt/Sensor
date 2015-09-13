@@ -35,15 +35,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     var elementsCount = 0
     var gapErrors = 0
     var lastDate = NSDate.distantPast()
-    var lastItem = ""
+    var lastItem : AccelerometerData!
     
-    var flushTimer : NSTimer!
+    var flushTimer = NSTimer()
     var tasks : [AWSTask] = []
-    let lockQueue = dispatch_queue_create("com.accelero.kinesisTaskQueue", nil)
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        dateFormatter.dateFormat = AppGlobals.ISO8601_FORMAT
         
         let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")!
         infoPlist = NSDictionary(contentsOfFile: path)
@@ -107,48 +106,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject],
-        replyHandler: ([String : AnyObject]) -> Void) {
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject],replyHandler: ([String : AnyObject]) -> Void) {
         batchesCount++
         NSLog("receiveBatch(\(batchesCount))")
-        let payload = message[AppGlobals.ACCELEROMETER_KEY] as! [String]
-        var elements : [String] = []
+        let payload = message[AppGlobals.ACCELEROMETER_KEY] as! NSData
+        
+        // let's get the payload back
+        let data = try! NSJSONSerialization.JSONObjectWithData(payload, options: NSJSONReadingOptions(rawValue: UInt(0))) as! [NSDictionary]
         
         // walk the elements looking for gaps in sensor records
-        for (var i = 0; i < payload.count; i++) {
-            let item = payload[i]
+        var i = 0
+        for element in data {
+            let accelerometerData = AccelerometerData(dateFormatter: dateFormatter, dictionary: element)
             elementsCount++
-            elements = item.componentsSeparatedByString(",")
+            i++
             
-            let date = dateFormatter.dateFromString(elements[1])!
-            if (abs(date.timeIntervalSinceDate(lastDate)) > 0.025) {
-                NSLog("gap: index=%d, old=%@, new=%@", i, lastItem, item)
+            if (abs(accelerometerData.timeStamp.timeIntervalSinceDate(lastDate)) > 0.025) {
+                NSLog("gap: index=%d, old=%@, new=%@", i, lastDate, accelerometerData.timeStamp)
                 gapErrors++
             }
             
-            lastItem = item
-            lastDate = date
+            lastItem = accelerometerData
+            lastDate = accelerometerData.timeStamp
         }
         
         // send the record
-        let data = try! NSJSONSerialization.dataWithJSONObject(payload, options: NSJSONWritingOptions.PrettyPrinted)
+        self.tasks.append(self.kinesis.saveRecord(payload, streamName: self.infoPlist[AppGlobals.KINESIS_STREAM_KEY] as! String))
         
-        dispatch_sync(lockQueue) {
-            self.tasks.append(self.kinesis.saveRecord(data, streamName: self.infoPlist[AppGlobals.KINESIS_STREAM_KEY] as! String))
-            
-            if (self.flushTimer == nil) {
-                NSOperationQueue.mainQueue().addOperationWithBlock() {
-                    self.flushTimer = NSTimer.scheduledTimerWithTimeInterval(
-                        AppDelegate.KINESIS_FLUSH_DELAY_SEC,
-                        target: self,
-                        selector: "flushHandler:",
-                        userInfo: nil,
-                        repeats: false)
-                }
+        if (!self.flushTimer.valid) {
+            NSOperationQueue.mainQueue().addOperationWithBlock() {
+                self.flushTimer = NSTimer.scheduledTimerWithTimeInterval(
+                    AppDelegate.KINESIS_FLUSH_DELAY_SEC,
+                    target: self,
+                    selector: "flushHandler:",
+                    userInfo: nil,
+                    repeats: false)
             }
         }
         
-        viewController.updateSensorState(self, elements: elements)
+        viewController.updateSensorState(self, lastItem: lastItem)
         viewController.updateKinesisState(self)
         
         replyHandler(NSDictionary() as! [String : AnyObject])
@@ -158,27 +154,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         self.flushCount++
         NSLog("flushHandler(\(self.flushCount))")
         
-        dispatch_sync(lockQueue) {
+        let result = AWSTask(forCompletionOfAllTasks: self.tasks).continueWithSuccessBlock {
+            (task: AWSTask!) -> AWSTask! in
             
-            let result = AWSTask(forCompletionOfAllTasks: self.tasks).continueWithSuccessBlock {
-                (task: AWSTask!) -> AWSTask! in
-                
-                self.tasks = []
-                self.flushTimer = nil
-                
-                // TODO eventually remove this manual refresh of the token if near
-                if (self.credentialsProvider.expiration == nil ||
-                    self.credentialsProvider.expiration.timeIntervalSinceNow < AppDelegate.CREDENTIAL_REFRESH_WINDOW_SEC) {
-                        NSLog("refreshAWSCredentials")
-                        self.credentialsProvider.refresh()
-                }
-                
-                self.timeLastFlush = NSDate()
-                return self.kinesis.submitAllRecords()
+            self.tasks = []
+            
+            // TODO eventually remove this manual refresh of the token if near
+            if (self.credentialsProvider.expiration == nil ||
+                self.credentialsProvider.expiration.timeIntervalSinceNow < AppDelegate.CREDENTIAL_REFRESH_WINDOW_SEC) {
+                    NSLog("refreshAWSCredentials")
+                    self.credentialsProvider.refresh()
             }
-            if (result.error != nil) {
-                NSLog("flushHandler error:\(result.error)")
-            }
+            
+            self.timeLastFlush = NSDate()
+            return self.kinesis.submitAllRecords()
+        }
+        if (result.error != nil) {
+            NSLog("flushHandler error:\(result.error)")
         }
         viewController.updateKinesisState(self)
     }
