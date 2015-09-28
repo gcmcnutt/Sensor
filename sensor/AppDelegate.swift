@@ -162,16 +162,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
             // TODO eventually remove this manual refresh of the token if near
             if (self.credentialsProvider.expiration == nil ||
                 self.credentialsProvider.expiration.timeIntervalSinceNow < AppDelegate.CREDENTIAL_REFRESH_WINDOW_SEC) {
-                    NSLog("refreshAWSCredentials")
-                    self.credentialsProvider.refresh()
+                    let delegate = AuthorizeUserDelegate(parentController: self.viewController)
+                    delegate.launchGetAccessToken()
+                    NSLog("refreshd Cognito credentials")
             }
             
             self.timeLastFlush = NSDate()
             return self.kinesis.submitAllRecords()
         }
+        
         if (result.error != nil) {
             NSLog("flushHandler error:\(result.error)")
         }
+        
         viewController.updateKinesisState(self)
     }
 }

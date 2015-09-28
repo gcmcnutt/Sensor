@@ -19,9 +19,10 @@ extension CMSensorDataList: SequenceType {
 }
 
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
-    static let MAX_PAYLOAD_COUNT = 200
+    static let MAX_PAYLOAD_COUNT = 1000
     static let FAST_POLL_DELAY_SEC = 0.01
     static let SLOW_POLL_DELAY_SEC = 4.0
+    static let MAX_EARLIEST_TIME_SEC = -24.0 * 60.0 * 60.0 // a day ago
     
     let wcsession = WCSession.defaultSession()
     let sr = CMSensorRecorder()
@@ -64,7 +65,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         summaryDateFormatter.dateFormat = "HH:mm:ss.SSS"
         
         // can we record?
-        haveAccelerometer = false//CMSensorRecorder.isAccelerometerRecordingAvailable()
+        haveAccelerometer = CMSensorRecorder.isAccelerometerRecordingAvailable()
         startVal.setEnabled(haveAccelerometer)
         lastStartVal.setText(summaryDateFormatter.stringFromDate(lastStart))
         
@@ -120,11 +121,15 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         cmdCount++
         NSLog("timerHander(\(cmdCount))")
         
+        // create a pending update state (only committed if the data gets to phone)
         payloadBatch = []
         newItems = itemCount
-        newLatestDate = latestDate
         newBatchNum = batchNum
         
+        // within a certain time of now
+        let earliest = NSDate().dateByAddingTimeInterval(InterfaceController.MAX_EARLIEST_TIME_SEC)
+        newLatestDate = latestDate.laterDate(earliest)
+
         // real or faking it?
         if (haveAccelerometer!) {
             let data = sr.accelerometerDataFromDate(newLatestDate, toDate: NSDate())
@@ -163,7 +168,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             newBatchNum = batchNum + 1
             while (payloadBatch.count < InterfaceController.MAX_PAYLOAD_COUNT && newLatestDate.compare(NSDate()) == NSComparisonResult.OrderedAscending) {
                 
-                let data = AccelerometerData(dateFormatter: dateFormatter, id: cmdCount, date: newLatestDate, x: 0.0, y: 0.1, z: 0.2)
+                let data = AccelerometerData(dateFormatter: dateFormatter, id: cmdCount, date: newLatestDate, x: random(), y: random(), z: random())
                 
                 newItems++
                 newLatestDate = newLatestDate.dateByAddingTimeInterval(0.02)
@@ -186,6 +191,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             // no data, do a slow poll
             updateUI(true)
         }
+    }
+    
+    func random() -> Double {
+        return Double(arc4random()) / 0xFFFFFFFF
     }
     
     func sendSuccess(reply : [String : AnyObject]) {
