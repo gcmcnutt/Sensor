@@ -14,8 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     // how long until flush?
     static let KINESIS_FLUSH_DELAY_SEC : Double = 30.0
     
+    static let DISPLAY_UPDATE_SEC : Double = 0.5
+    
     // how close to expiration should we refresh STS token?
-    static let CREDENTIAL_REFRESH_WINDOW_SEC : Double = 200.0
+    static let CREDENTIAL_REFRESH_WINDOW_SEC : Double = 1800.0
     
     var window: UIWindow?
     var viewController : ViewController!
@@ -35,9 +37,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     var elementsCount = 0
     var gapErrors = 0
     var lastDate = NSDate.distantPast()
-    var lastItem : AccelerometerData!
+    var lastItem : AccelerometerData?
+    var lastBatchNum : String = ""
     
     var flushTimer = NSTimer()
+    var displayTimer = NSTimer()
     var tasks : [AWSTask] = []
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -63,8 +67,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         // tune up kinesis
         kinesis = AWSKinesisRecorder.defaultKinesisRecorder()
         kinesis.diskAgeLimit = 30 * 24 * 60 * 60; // 30 days
-        kinesis.diskByteLimit = 5 * 1024 * 1024; // 10MB
-        kinesis.notificationByteThreshold = 4 * 1024 * 1024; // 5MB
+        kinesis.diskByteLimit = 100 * 1024 * 1024;
+        kinesis.notificationByteThreshold = 80 * 1024 * 1024;
         
         // see if we are already logged in
         let delegate = AuthorizeUserDelegate(parentController: viewController)
@@ -100,16 +104,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        if (!self.displayTimer.valid) {
+            NSOperationQueue.mainQueue().addOperationWithBlock() {
+                self.displayTimer = NSTimer.scheduledTimerWithTimeInterval(
+                    AppDelegate.DISPLAY_UPDATE_SEC,
+                    target: self,
+                    selector: "displayUpdate:",
+                    userInfo: nil,
+                    repeats: true)
+            }
+        }
     }
     
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    func displayUpdate(timer : NSTimer) {
+        self.viewController.updateDisplayState(self)
+    }
+    
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject],replyHandler: ([String : AnyObject]) -> Void) {
         batchesCount++
         NSLog("receiveBatch(\(batchesCount))")
-        let payload = message[AppGlobals.ACCELEROMETER_KEY] as! NSData
+        let payload = message[AppGlobals.PHONE_DATA_KEY] as! NSData
+        lastBatchNum = message[AppGlobals.PHONE_DATA_BATCH_ID] as! String
         
         // let's get the payload back
         let data = try! NSJSONSerialization.JSONObjectWithData(payload, options: NSJSONReadingOptions(rawValue: UInt(0))) as! [NSDictionary]
@@ -131,7 +150,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         }
         
         // send the record
-        self.tasks.append(self.kinesis.saveRecord(payload, streamName: self.infoPlist[AppGlobals.KINESIS_STREAM_KEY] as! String))
+        let outData = [
+            AppGlobals.PAYLOAD_USER_ID : viewController.idRaw,
+            AppGlobals.PAYLOAD_PROCESS_DATE : dateFormatter.stringFromDate(NSDate()),
+            AppGlobals.PAYLOAD_BATCH : data,
+            AppGlobals.PAYLOAD_BATCH_ID : lastBatchNum
+        ]
+        let output = try! NSJSONSerialization.dataWithJSONObject(outData,
+            options: NSJSONWritingOptions.PrettyPrinted)
+        self.tasks.append(self.kinesis.saveRecord(output, streamName: self.infoPlist[AppGlobals.KINESIS_STREAM_KEY] as! String))
         
         if (!self.flushTimer.valid) {
             NSOperationQueue.mainQueue().addOperationWithBlock() {
@@ -143,10 +170,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
                     repeats: false)
             }
         }
-        
-        viewController.updateSensorState(self, lastItem: lastItem)
-        viewController.updateKinesisState(self)
-        
         replyHandler(NSDictionary() as! [String : AnyObject])
     }
     
@@ -154,7 +177,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         self.flushCount++
         NSLog("flushHandler(\(self.flushCount))")
         
-        let result = AWSTask(forCompletionOfAllTasks: self.tasks).continueWithSuccessBlock {
+        AWSTask(forCompletionOfAllTasks: self.tasks).continueWithBlock {
             (task: AWSTask!) -> AWSTask! in
             
             self.tasks = []
@@ -164,18 +187,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
                 self.credentialsProvider.expiration.timeIntervalSinceNow < AppDelegate.CREDENTIAL_REFRESH_WINDOW_SEC) {
                     let delegate = AuthorizeUserDelegate(parentController: self.viewController)
                     delegate.launchGetAccessToken()
-                    NSLog("refreshd Cognito credentials")
+                    NSLog("refreshed Cognito credentials")
             }
             
             self.timeLastFlush = NSDate()
-            return self.kinesis.submitAllRecords()
+            self.kinesis.submitAllRecords().continueWithBlock {
+                (task: AWSTask!) -> AWSTask! in
+                if (task.error != nil) {
+                    NSLog("flushHandler error:\(task.error)")
+                }
+                return task
+            }
+            return task
         }
-        
-        if (result.error != nil) {
-            NSLog("flushHandler error:\(result.error)")
-        }
-        
-        viewController.updateKinesisState(self)
     }
 }
 

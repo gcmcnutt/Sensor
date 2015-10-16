@@ -10,7 +10,8 @@ import Foundation
 
 class AppGlobals {
     // key for exchange between watch and iPhone (WCSession)
-    static let ACCELEROMETER_KEY = "acc"
+    static let PHONE_DATA_KEY = "acc"
+    static let PHONE_DATA_BATCH_ID = "id"
     
     // key for the cognito pool in Info
     static let IDENTITY_POOL_ID_KEY = "cognitoPool"
@@ -19,4 +20,9 @@ class AppGlobals {
     static let KINESIS_STREAM_KEY = "kinesisStream"
     
     static let ISO8601_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    
+    static let PAYLOAD_USER_ID = "userId"
+    static let PAYLOAD_PROCESS_DATE = "processDate"
+    static let PAYLOAD_BATCH = "data"
+    static let PAYLOAD_BATCH_ID = "id"
 }

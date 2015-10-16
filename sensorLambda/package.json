@@ -1,0 +1,19 @@
+{
+    "name": "sensor-lambda",
+    "version": "1.0.0",
+    "description": "lambda that takes sensor events out to dynamoDB",
+    "private": "true",
+    "devDependencies": {
+        "grunt": "0.4.*",
+        "grunt-aws-lambda": "0.10.0",
+	"aws-sdk": "2.2.10"
+    },
+    "dependencies": {
+	"async": "1.4.2"
+    },
+    "bundledDependencies": [
+        "async"
+    ],
+    "author": "Greg McNutt",
+    "license": "BSD"
+}

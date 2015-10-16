@@ -29,6 +29,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var lastZVal: UILabel!
     @IBOutlet weak var gapErrorsVal: UILabel!
     
+    // TODO A little hacky to rendezvous this value through view...
+    var idRaw : String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -51,25 +54,29 @@ class ViewController: UIViewController {
         AIMobileLib.clearAuthorizationState(delegate)
     }
     
-    func updateKinesisState(appDelegate : AppDelegate) {
-        NSOperationQueue.mainQueue().addOperationWithBlock() {
-            self.localStorageVal.text = appDelegate.kinesis.diskBytesUsed.description
-            self.flushCountVal.text = appDelegate.flushCount.description
-            self.lastFlushTimeVal.text = appDelegate.dateFormatter.stringFromDate(appDelegate.timeLastFlush)
-            self.tokenExpireVal.text = appDelegate.credentialsProvider.expiration != nil ? appDelegate.dateFormatter.stringFromDate(appDelegate.credentialsProvider.expiration) : "nil"
-        }
-    }
-    
-    func updateSensorState(appDelegate : AppDelegate, lastItem : AccelerometerData) {
+    func updateDisplayState(appDelegate : AppDelegate) {
         NSOperationQueue.mainQueue().addOperationWithBlock() {
             self.batchesVal.text = appDelegate.batchesCount.description
             self.elementsVal.text = appDelegate.elementsCount.description
-            self.lastBatchVal.text = lastItem.id.description
-            self.lastTimeVal.text = appDelegate.dateFormatter.stringFromDate(lastItem.timeStamp)
-            self.lastXVal.text = lastItem.x.description
-            self.lastYVal.text = lastItem.y.description
-            self.lastZVal.text = lastItem.z.description
+            self.lastBatchVal.text = appDelegate.lastBatchNum
+            if let ts = appDelegate.lastItem?.timeStamp {
+                self.lastTimeVal.text = appDelegate.dateFormatter.stringFromDate(ts)
+            } else {
+                self.lastTimeVal.text = nil
+            }
+            self.lastXVal.text = appDelegate.lastItem?.x.description
+            self.lastYVal.text = appDelegate.lastItem?.y.description
+            self.lastZVal.text = appDelegate.lastItem?.z.description
             self.gapErrorsVal.text = appDelegate.gapErrors.description
+            
+            self.localStorageVal.text = appDelegate.kinesis.diskBytesUsed.description
+            self.flushCountVal.text = appDelegate.flushCount.description
+            self.lastFlushTimeVal.text = appDelegate.dateFormatter.stringFromDate(appDelegate.timeLastFlush)
+            if let ts = appDelegate.credentialsProvider.expiration {
+                self.tokenExpireVal.text = appDelegate.dateFormatter.stringFromDate(ts)
+            } else {
+                self.tokenExpireVal.text = nil
+            }
         }
     }
     
@@ -78,6 +85,7 @@ class ViewController: UIViewController {
             self.nameVal.text = name
             self.emailVal.text = email
             self.idVal.text = userId
+            self.idRaw = userId
             self.postalVal.text = postal
         }
     }

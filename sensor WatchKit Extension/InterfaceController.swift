@@ -19,7 +19,7 @@ extension CMSensorDataList: SequenceType {
 }
 
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
-    static let MAX_PAYLOAD_COUNT = 1000
+    static let MAX_PAYLOAD_COUNT = 200
     static let FAST_POLL_DELAY_SEC = 0.01
     static let SLOW_POLL_DELAY_SEC = 4.0
     static let MAX_EARLIEST_TIME_SEC = -24.0 * 60.0 * 60.0 // a day ago
@@ -65,7 +65,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         summaryDateFormatter.dateFormat = "HH:mm:ss.SSS"
         
         // can we record?
-        haveAccelerometer = CMSensorRecorder.isAccelerometerRecordingAvailable()
+        haveAccelerometer = false//CMSensorRecorder.isAccelerometerRecordingAvailable()
         startVal.setEnabled(haveAccelerometer)
         lastStartVal.setText(summaryDateFormatter.stringFromDate(lastStart))
         
@@ -183,8 +183,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             let output = try! NSJSONSerialization.dataWithJSONObject(payloadBatch,
                 options: NSJSONWritingOptions.PrettyPrinted)
             
-            self.wcsession.sendMessage(
-                [AppGlobals.ACCELEROMETER_KEY : output],
+            self.wcsession.sendMessage([
+                AppGlobals.PHONE_DATA_KEY : output,
+                AppGlobals.PHONE_DATA_BATCH_ID : newBatchNum.description
+                ],
                 replyHandler: sendSuccess,
                 errorHandler: sendError)
         } else {
