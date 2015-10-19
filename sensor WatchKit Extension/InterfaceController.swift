@@ -46,6 +46,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     var newBatchNum : UInt64!
     
     var haveAccelerometer : Bool!
+    var fakeData : Bool!
     
     @IBOutlet var durationVal: WKInterfaceLabel!
     @IBOutlet var startVal: WKInterfaceButton!
@@ -65,7 +66,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         summaryDateFormatter.dateFormat = "HH:mm:ss.SSS"
         
         // can we record?
-        haveAccelerometer = false//CMSensorRecorder.isAccelerometerRecordingAvailable()
+        haveAccelerometer = CMSensorRecorder.isAccelerometerRecordingAvailable()
         startVal.setEnabled(haveAccelerometer)
         lastStartVal.setText(summaryDateFormatter.stringFromDate(lastStart))
         
@@ -85,6 +86,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     // UI stuff
+    @IBAction func fakeDataAction(value: Bool) {
+        fakeData = value
+    }
+    
     @IBAction func durationAction(value: Float) {
         durationValue = Double(value)
         self.durationVal.setText(value.description)
@@ -131,7 +136,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         newLatestDate = latestDate.laterDate(earliest)
 
         // real or faking it?
-        if (haveAccelerometer!) {
+        if (!fakeData! || haveAccelerometer!) {
             let data = sr.accelerometerDataFromDate(newLatestDate, toDate: NSDate())
             if (data != nil) {
                 

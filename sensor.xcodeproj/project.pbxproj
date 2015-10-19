@@ -132,6 +132,7 @@
 		D3A2CF871B7F185F0013AAD2 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		D3A2CF891B7F185F0013AAD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3A2CF8B1B7F185F0013AAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3DE94121BD3141E009A3F7E /* sensorLambda */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sensorLambda; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +192,7 @@
 		D3A2CF381B7F185F0013AAD2 = {
 			isa = PBXGroup;
 			children = (
+				D3DE94121BD3141E009A3F7E /* sensorLambda */,
 				D3A2CF431B7F185F0013AAD2 /* sensor */,
 				D3A2CF581B7F185F0013AAD2 /* sensorTests */,
 				D3A2CF631B7F185F0013AAD2 /* sensorUITests */,

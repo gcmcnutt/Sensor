@@ -6,10 +6,10 @@
     "devDependencies": {
         "grunt": "0.4.*",
         "grunt-aws-lambda": "0.10.0",
-	"aws-sdk": "2.2.10"
+        "aws-sdk": "2.2.10"
     },
     "dependencies": {
-	"async": "1.4.2"
+        "async": "1.4.2"
     },
     "bundledDependencies": [
         "async"
