@@ -136,7 +136,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         newLatestDate = latestDate.laterDate(earliest)
 
         // real or faking it?
-        if (!fakeData! || haveAccelerometer!) {
+        if (haveAccelerometer! && !fakeData!) {
             let data = sr.accelerometerDataFromDate(newLatestDate, toDate: NSDate())
             if (data != nil) {
                 
