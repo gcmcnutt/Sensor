@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     static let DISPLAY_UPDATE_SEC : Double = 0.5
     
     // how close to expiration should we refresh STS token?
-    static let CREDENTIAL_REFRESH_WINDOW_SEC : Double = 1800.0
+    static let CREDENTIAL_REFRESH_WINDOW_SEC : Double = 300.0
     
     var window: UIWindow?
     var viewController : ViewController!
@@ -66,17 +66,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         
         // tune up kinesis
         kinesis = AWSKinesisRecorder.defaultKinesisRecorder()
-        kinesis.diskAgeLimit = 30 * 24 * 60 * 60; // 30 days
-        kinesis.diskByteLimit = 100 * 1024 * 1024;
-        kinesis.notificationByteThreshold = 80 * 1024 * 1024;
+        kinesis.diskAgeLimit = 30 * 24 * 60 * 60 // 30 days
+        kinesis.diskByteLimit = 100 * 1024 * 1024
+        kinesis.notificationByteThreshold = 80 * 1024 * 1024
         
         // see if we are already logged in
         let delegate = AuthorizeUserDelegate(parentController: viewController)
         delegate.launchGetAccessToken()
         
-        // lastly, wake up session to watch
+        // wake up session to watch
         wcsession.delegate = self
         wcsession.activateSession()
+        
+        // kick off flush timer
+        NSOperationQueue.mainQueue().addOperationWithBlock() {
+            self.flushTimer = NSTimer.scheduledTimerWithTimeInterval(
+                AppDelegate.KINESIS_FLUSH_DELAY_SEC,
+                target: self,
+                selector: "flushHandler:",
+                userInfo: nil,
+                repeats: false)
+        }
         
         return true
     }
@@ -160,16 +170,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
             options: NSJSONWritingOptions.PrettyPrinted)
         self.tasks.append(self.kinesis.saveRecord(output, streamName: self.infoPlist[AppGlobals.KINESIS_STREAM_KEY] as! String))
         
-        if (!self.flushTimer.valid) {
-            NSOperationQueue.mainQueue().addOperationWithBlock() {
-                self.flushTimer = NSTimer.scheduledTimerWithTimeInterval(
-                    AppDelegate.KINESIS_FLUSH_DELAY_SEC,
-                    target: self,
-                    selector: "flushHandler:",
-                    userInfo: nil,
-                    repeats: false)
-            }
-        }
         replyHandler(NSDictionary() as! [String : AnyObject])
     }
     
@@ -191,14 +191,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
             }
             
             self.timeLastFlush = NSDate()
-            self.kinesis.submitAllRecords().continueWithBlock {
+            return self.kinesis.submitAllRecords()
+            }.continueWithBlock {
                 (task: AWSTask!) -> AWSTask! in
                 if (task.error != nil) {
                     NSLog("flushHandler error:\(task.error)")
                 }
+                NSLog("flushHandler done. remaining(\(self.kinesis.diskBytesUsed))")
+                NSOperationQueue.mainQueue().addOperationWithBlock() {
+                    self.flushTimer = NSTimer.scheduledTimerWithTimeInterval(
+                        AppDelegate.KINESIS_FLUSH_DELAY_SEC,
+                        target: self,
+                        selector: "flushHandler:",
+                        userInfo: nil,
+                        repeats: false)
+                }
                 return task
-            }
-            return task
         }
     }
 }
