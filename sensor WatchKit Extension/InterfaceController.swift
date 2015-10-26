@@ -45,7 +45,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     var newBatchNum : UInt64!
     
     var haveAccelerometer : Bool!
-    var fakeData : Bool!
+    var fakeData : Bool = false
     
     @IBOutlet var durationVal: WKInterfaceLabel!
     @IBOutlet var startVal: WKInterfaceButton!
@@ -134,7 +134,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         newLatestDate = latestDate.laterDate(earliest)
         
         // real or faking it?
-        if (haveAccelerometer! && !fakeData!) {
+        if (haveAccelerometer! && !fakeData) {
             let data = sr.accelerometerDataFromDate(newLatestDate, toDate: NSDate())
             if (data != nil) {
                 

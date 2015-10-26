@@ -1,10 +1,32 @@
 <html>
+    <style> /* set the CSS */
+        
+        body { font: 12px Arial;}
+        
+        path {
+            stroke: grey;
+            stroke-width: 2;
+            fill: none;
+        }
+    
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: grey;
+        stroke-width: 1;
+        shape-rendering: crispEdges;
+    }
+    
+        </style>
     <title>Sensor Web</title>
     <body>
         <script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.11.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+        
         <div id="amazon-root"></div>
         
-        <script type="text/javascript">
+        <script>
             window.customerId = null;
             
             window.onAmazonLoginReady = function() {
@@ -74,7 +96,7 @@
             width="156" height="32" />
         </a>
         
-        <script type="text/javascript">
+        <script>
             
             document.getElementById('LoginWithAmazon').onclick = function() {
                 options = { scope : 'profile' };
@@ -86,7 +108,7 @@
         
         <a href="#" id="Logout">Logout</a>
         
-        <script type="text/javascript">
+        <script>
             document.getElementById('Logout').onclick = function() {
                 amazon.Login.logout();
                 
@@ -95,34 +117,133 @@
             };
         </script>
         
-        <br>
+        <br/>
         <input type="text" id="dateStart"/>
         <script>
-            document.getElementById('dateStart').value = new Date().toJSON();
-        </script>
+            document.getElementById('dateStart').value = "2015-10-26T05:24:43"; //new Date().toJSON();
+            </script>
         
-        <button id="Fetch">Fetch records</a>
-        <script type="text/javascript">
-            document.getElementById('Fetch').onclick = function() {
-                var docClient = new AWS.DynamoDB.DocumentClient({region: 'us-east-1'});
-                
-                var params = {
-                    TableName : 'sensor',
-                    Limit : 200,
-                    KeyConditionExpression: 'hashKey = :hkey and rangeKey > :rkey',
-                    ExpressionAttributeValues: {
-                        ':hkey': sessionStorage.getItem('customerId'),
-                        ':rkey': document.getElementById('dateStart').value
-                    }
-                };
-                
-                // TODO the iam policy condition isn't narrowing down by cognito id...
-                docClient.query(params, function(err, data) {
-                               if (err) console.log(err);
-                               else console.log(data);
-                               });
-            };
-        </script>
+        <button id="Fetch">Fetch records</button>
+        
+        <br/>
+        <script>
+            
+            // Set the dimensions of the canvas / graph
+            var margin = {top: 30, right: 20, bottom: 30, left: 50},
+            width = 600 - margin.left - margin.right,
+            height = 270 - margin.top - margin.bottom;
+            
+            // Parse the date / time
+            var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S.%LZ").parse;
+            
+            // Set the ranges
+            var x = d3.time.scale().range([0, width]);
+            var y = d3.scale.linear().range([height, 0]);
+            
+            // Define the axes
+            var xAxis = d3.svg.axis().scale(x)
+            .orient("bottom").ticks(5);
+            
+            var yAxis = d3.svg.axis().scale(y)
+            .orient("left").ticks(5);
+            
+            // Define the line
+            var xval = d3.svg.line()
+            .x(function(d) { return x(d.date); })
+            .y(function(d) { return y(d.x); });
+            var yval = d3.svg.line()
+            .x(function(d) { return x(d.date); })
+            .y(function(d) { return y(d.y); });
+            var zval = d3.svg.line()
+            .x(function(d) { return x(d.date); })
+            .y(function(d) { return y(d.z); });
+            
+            // Adds the svg canvas
+            var svg = d3.select("body")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                  "translate(" + margin.left + "," + margin.top + ")");
+                  
+                  // Get the data
+                document.getElementById('Fetch').onclick = function() {
+                         var docClient = new AWS.DynamoDB.DocumentClient({region: 'us-east-1'});
+                         
+                         var params = {
+                         TableName : 'sensor',
+                         Limit : 200,
+                         KeyConditionExpression: 'hashKey = :hkey and rangeKey > :rkey',
+                         ExpressionAttributeValues: {
+                         ':hkey': sessionStorage.getItem('customerId'),
+                         ':rkey': document.getElementById('dateStart').value
+                         }
+                         };
+                         
+                         // TODO the iam policy condition isn't narrowing down by cognito id...
+                         docClient.query(params, function(err, rawData) {
+                                         if (err) console.log(err);
+                                         else {
+                                         console.log(rawData);
+                                         var data = [];
+
+                                        rawData.Items.forEach(function(d) {
+                                                      var sensorTime = parseDate(d.rangeKey.split("_")[0]);
+                                                        data.push({
+                                                                    date : sensorTime,
+                                                                    x : d.x,
+                                                                  y : d.y,
+                                                                  z : d.z
+                                                                    });
+                                                      });
+                                         
+                                         // Scale the range of the data
+                                         x.domain(d3.extent(data, function(d) { return d.date; }));
+                                         y.domain([-2.0, +2.0]);
+                                         
+                                         // Add the valueline path.
+                                         svg.append("path")
+                                         .attr("class", "line")
+                                         .style("stroke", "red")
+                                         .attr("d", xval(data));
+                                         // Add the valueline path.
+                                         svg.append("path")
+                                         .attr("class", "line")
+                                         .style("stroke", "green")
+                                         .attr("d", yval(data));
+                                         // Add the valueline path.
+                                         svg.append("path")
+                                         .attr("class", "line")
+                                         .style("stroke", "blue")
+                                         .attr("d", zval(data));
+                                         
+                                         // Add the X Axis
+                                         svg.append("g")
+                                         .attr("class", "x axis")
+                                         .attr("transform", "translate(0," + height + ")")
+                                         .call(xAxis);
+                                         
+                                         // Add the Y Axis
+                                         svg.append("g")
+                                         .attr("class", "y axis")
+                                         .call(yAxis);
+                                         
+                                         }
+                                         });
+                         
+                         //var trHTML = '';
+                         //$.each(data.Items, function (i, item) {
+                          //      trHTML += '<tr><td>' + item.rangeKey + '</td><td>' + item.x + '</td><td>' + item.y + '</td><td>' + item.z + '</td></tr>';
+                           //     });
+                         //$('#records_table').append(trHTML);
+                         //}
+                         //});
+                         
+                         
+                         
+                         };
+            </script>
         
     </body>
 </html>
