@@ -12,33 +12,29 @@ import CoreMotion
 // TODO seems a bit much just to get a json serialization...
 class AccelerometerData {
     var element = [String : AnyObject]()
-    var dateFormatter : NSDateFormatter!
     static let idKey = "id"
     static let tsKey = "ts"
     static let xKey = "x"
     static let yKey = "y"
     static let zKey = "z"
     
-    init(dateFormatter : NSDateFormatter, data : CMRecordedAccelerometerData) {
-        self.dateFormatter = dateFormatter
+    init(data : CMRecordedAccelerometerData) {
         element[AccelerometerData.idKey] = data.identifier.description
-        element[AccelerometerData.tsKey] = dateFormatter.stringFromDate(data.startDate)
+        element[AccelerometerData.tsKey] = AppGlobals.sharedInstance.dateFormatter.stringFromDate(data.startDate)
         element[AccelerometerData.xKey] = data.acceleration.x
         element[AccelerometerData.yKey] = data.acceleration.y
         element[AccelerometerData.zKey] = data.acceleration.z
     }
     
-    init(dateFormatter : NSDateFormatter, id : UInt64, date : NSDate, x : Double, y : Double, z : Double) {
-        self.dateFormatter = dateFormatter
+    init(id : UInt64, date : NSDate, x : Double, y : Double, z : Double) {
         element[AccelerometerData.idKey] = id.description
-        element[AccelerometerData.tsKey] = dateFormatter.stringFromDate(date)
+        element[AccelerometerData.tsKey] = AppGlobals.sharedInstance.dateFormatter.stringFromDate(date)
         element[AccelerometerData.xKey] = x
         element[AccelerometerData.yKey] = y
         element[AccelerometerData.zKey] = z
     }
     
-    init(dateFormatter : NSDateFormatter, dictionary : NSDictionary) {
-        self.dateFormatter = dateFormatter
+    init(dictionary : NSDictionary) {
         element[AccelerometerData.idKey] = dictionary[AccelerometerData.idKey]
         element[AccelerometerData.tsKey] = dictionary[AccelerometerData.tsKey]
         element[AccelerometerData.xKey] = dictionary[AccelerometerData.xKey]
@@ -54,7 +50,7 @@ class AccelerometerData {
     
     var timeStamp : NSDate {
         get {
-            return dateFormatter.dateFromString(element[AccelerometerData.tsKey] as! String)!
+            return AppGlobals.sharedInstance.dateFormatter.dateFromString(element[AccelerometerData.tsKey] as! String)!
         }
     }
     
@@ -63,7 +59,7 @@ class AccelerometerData {
             return element[AccelerometerData.xKey] as! Double
         }
     }
-
+    
     var y : Double {
         get {
             return element[AccelerometerData.yKey] as! Double

@@ -19,10 +19,20 @@ class AppGlobals {
     // key for the stream name
     static let KINESIS_STREAM_KEY = "kinesisStream"
     
-    static let ISO8601_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-    
     static let PAYLOAD_USER_ID = "userId"
     static let PAYLOAD_PROCESS_DATE = "processDate"
     static let PAYLOAD_BATCH = "data"
     static let PAYLOAD_BATCH_ID = "id"
+    
+    let dateFormatter = NSDateFormatter()
+    
+    // used for global date formatting...
+    static let ISO8601_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    
+    static let sharedInstance = AppGlobals()
+    
+    init() {
+        dateFormatter.dateFormat = AppGlobals.ISO8601_FORMAT
+        dateFormatter.timeZone = NSTimeZone(name:"UTC");
+    }
 }

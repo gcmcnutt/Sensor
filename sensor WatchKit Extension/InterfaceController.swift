@@ -26,7 +26,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     let wcsession = WCSession.defaultSession()
     let sr = CMSensorRecorder()
-    let dateFormatter = NSDateFormatter()
     let summaryDateFormatter = NSDateFormatter()
     
     var durationValue = 5.0
@@ -62,7 +61,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         super.awakeWithContext(context)
         
         // Configure interface objects here.
-        dateFormatter.dateFormat = AppGlobals.ISO8601_FORMAT
         summaryDateFormatter.dateFormat = "HH:mm:ss.SSS"
         
         // can we record?
@@ -134,7 +132,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         // within a certain time of now
         let earliest = NSDate().dateByAddingTimeInterval(InterfaceController.MAX_EARLIEST_TIME_SEC)
         newLatestDate = latestDate.laterDate(earliest)
-
+        
         // real or faking it?
         if (haveAccelerometer! && !fakeData!) {
             let data = sr.accelerometerDataFromDate(newLatestDate, toDate: NSDate())
@@ -162,7 +160,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                         NSLog("odd date: " + lastElement.description)
                     }
                     
-                    payloadBatch.append(AccelerometerData(dateFormatter: dateFormatter, data: lastElement).element)
+                    payloadBatch.append(AccelerometerData(data: lastElement).element)
                     
                     if (payloadBatch.count >= InterfaceController.MAX_PAYLOAD_COUNT) {
                         break
@@ -173,7 +171,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             newBatchNum = batchNum + 1
             while (payloadBatch.count < InterfaceController.MAX_PAYLOAD_COUNT && newLatestDate.compare(NSDate()) == NSComparisonResult.OrderedAscending) {
                 
-                let data = AccelerometerData(dateFormatter: dateFormatter, id: cmdCount, date: newLatestDate, x: random(), y: random(), z: random())
+                let data = AccelerometerData(id: cmdCount, date: newLatestDate, x: random(), y: random(), z: random())
                 
                 newItems++
                 newLatestDate = newLatestDate.dateByAddingTimeInterval(0.02)

@@ -17,14 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     static let DISPLAY_UPDATE_SEC : Double = 0.5
     
     // how close to expiration should we refresh STS token?
-    static let CREDENTIAL_REFRESH_WINDOW_SEC : Double = 300.0
+    static let CREDENTIAL_REFRESH_WINDOW_SEC : Double = 900.0
     
     var window: UIWindow?
     var viewController : ViewController!
     var infoPlist : NSDictionary!
     
     let wcsession = WCSession.defaultSession()
-    let dateFormatter = NSDateFormatter()
     
     // AWS plumbing
     var credentialsProvider : AWSCognitoCredentialsProvider!
@@ -46,7 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        dateFormatter.dateFormat = AppGlobals.ISO8601_FORMAT
         
         let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")!
         infoPlist = NSDictionary(contentsOfFile: path)
@@ -146,7 +144,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         // walk the elements looking for gaps in sensor records
         var i = 0
         for element in data {
-            let accelerometerData = AccelerometerData(dateFormatter: dateFormatter, dictionary: element)
+            let accelerometerData = AccelerometerData(dictionary: element)
             elementsCount++
             i++
             
@@ -162,7 +160,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         // send the record
         let outData = [
             AppGlobals.PAYLOAD_USER_ID : viewController.idRaw,
-            AppGlobals.PAYLOAD_PROCESS_DATE : dateFormatter.stringFromDate(NSDate()),
+            AppGlobals.PAYLOAD_PROCESS_DATE : AppGlobals.sharedInstance.dateFormatter.stringFromDate(NSDate()),
             AppGlobals.PAYLOAD_BATCH : data,
             AppGlobals.PAYLOAD_BATCH_ID : lastBatchNum
         ]
@@ -177,7 +175,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         self.flushCount++
         NSLog("flushHandler(\(self.flushCount))")
         
-        AWSTask(forCompletionOfAllTasks: self.tasks).continueWithBlock {
+        AWSTask(forCompletionOfAllTasks: self.tasks).continueWithSuccessBlock {
             (task: AWSTask!) -> AWSTask! in
             
             self.tasks = []
@@ -192,6 +190,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
             
             self.timeLastFlush = NSDate()
             return self.kinesis.submitAllRecords()
+            
             }.continueWithBlock {
                 (task: AWSTask!) -> AWSTask! in
                 if (task.error != nil) {
@@ -210,4 +209,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         }
     }
 }
-

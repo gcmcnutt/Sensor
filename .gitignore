@@ -5,6 +5,6 @@
 Pods
 Podfile.lock
 .DS_Store
-sensorLambda/dist/*
-sensorLambda/node_modules/*
+*/dist/*
+*/node_modules/*
 

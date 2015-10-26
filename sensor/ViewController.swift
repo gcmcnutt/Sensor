@@ -60,7 +60,7 @@ class ViewController: UIViewController {
             self.elementsVal.text = appDelegate.elementsCount.description
             self.lastBatchVal.text = appDelegate.lastBatchNum
             if let ts = appDelegate.lastItem?.timeStamp {
-                self.lastTimeVal.text = appDelegate.dateFormatter.stringFromDate(ts)
+                self.lastTimeVal.text = AppGlobals.sharedInstance.dateFormatter.stringFromDate(ts)
             } else {
                 self.lastTimeVal.text = nil
             }
@@ -71,9 +71,9 @@ class ViewController: UIViewController {
             
             self.localStorageVal.text = appDelegate.kinesis.diskBytesUsed.description
             self.flushCountVal.text = appDelegate.flushCount.description
-            self.lastFlushTimeVal.text = appDelegate.dateFormatter.stringFromDate(appDelegate.timeLastFlush)
+            self.lastFlushTimeVal.text = AppGlobals.sharedInstance.dateFormatter.stringFromDate(appDelegate.timeLastFlush)
             if let ts = appDelegate.credentialsProvider.expiration {
-                self.tokenExpireVal.text = appDelegate.dateFormatter.stringFromDate(ts)
+                self.tokenExpireVal.text = AppGlobals.sharedInstance.dateFormatter.stringFromDate(ts)
             } else {
                 self.tokenExpireVal.text = nil
             }

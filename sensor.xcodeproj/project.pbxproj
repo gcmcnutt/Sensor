@@ -14,9 +14,9 @@
 		D34986B21B89251F0000117E /* AccessTokenDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34986B11B89251F0000117E /* AccessTokenDelegate.swift */; };
 		D34986B41B8925440000117E /* GetProfileDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34986B31B8925440000117E /* GetProfileDelegate.swift */; };
 		D34986B61B8925750000117E /* LogoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34986B51B8925750000117E /* LogoutDelegate.swift */; };
-		D36007D91B8EAC7A007A4846 /* AppGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36007D81B8EAC7A007A4846 /* AppGlobals.swift */; settings = {ASSET_TAGS = (); }; };
+		D36007D91B8EAC7A007A4846 /* AppGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36007D81B8EAC7A007A4846 /* AppGlobals.swift */; };
 		D36007DA1B8EACCB007A4846 /* AppGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36007D81B8EAC7A007A4846 /* AppGlobals.swift */; };
-		D377510D1B95729D00E64E60 /* AccelerometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D377510C1B95729D00E64E60 /* AccelerometerData.swift */; settings = {ASSET_TAGS = (); }; };
+		D377510D1B95729D00E64E60 /* AccelerometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D377510C1B95729D00E64E60 /* AccelerometerData.swift */; };
 		D377510E1B9572D700E64E60 /* AccelerometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D377510C1B95729D00E64E60 /* AccelerometerData.swift */; };
 		D3A2CF451B7F185F0013AAD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2CF441B7F185F0013AAD2 /* AppDelegate.swift */; };
 		D3A2CF471B7F185F0013AAD2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2CF461B7F185F0013AAD2 /* ViewController.swift */; };
@@ -35,6 +35,7 @@
 		D3A2CF861B7F185F0013AAD2 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2CF851B7F185F0013AAD2 /* GlanceController.swift */; };
 		D3A2CF881B7F185F0013AAD2 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2CF871B7F185F0013AAD2 /* ComplicationController.swift */; };
 		D3A2CF8A1B7F185F0013AAD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3A2CF891B7F185F0013AAD2 /* Assets.xcassets */; };
+		D3F976671BDD4FEA00759AFD /* sensorWeb in Resources */ = {isa = PBXBuildFile; fileRef = D3F976661BDD4FEA00759AFD /* sensorWeb */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +134,7 @@
 		D3A2CF891B7F185F0013AAD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3A2CF8B1B7F185F0013AAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3DE94121BD3141E009A3F7E /* sensorLambda */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sensorLambda; sourceTree = "<group>"; };
+		D3F976661BDD4FEA00759AFD /* sensorWeb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sensorWeb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 		D3A2CF381B7F185F0013AAD2 = {
 			isa = PBXGroup;
 			children = (
+				D3F976661BDD4FEA00759AFD /* sensorWeb */,
 				D3DE94121BD3141E009A3F7E /* sensorLambda */,
 				D3A2CF431B7F185F0013AAD2 /* sensor */,
 				D3A2CF581B7F185F0013AAD2 /* sensorTests */,
@@ -446,6 +449,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3A2CF4F1B7F185F0013AAD2 /* LaunchScreen.storyboard in Resources */,
+				D3F976671BDD4FEA00759AFD /* sensorWeb in Resources */,
 				D3A2CF4C1B7F185F0013AAD2 /* Assets.xcassets in Resources */,
 				D3A2CF4A1B7F185F0013AAD2 /* Main.storyboard in Resources */,
 			);

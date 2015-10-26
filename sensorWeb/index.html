@@ -1,0 +1,128 @@
+<html>
+    <title>Sensor Web</title>
+    <body>
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.11.js"></script>
+        <div id="amazon-root"></div>
+        
+        <script type="text/javascript">
+            window.customerId = null;
+            
+            window.onAmazonLoginReady = function() {
+                amazon.Login.setClientId('amzn1.application-oa2-client.33fac734570f45738b6cef10bb67aaff');
+                
+                AWS.config.update({
+                                  region: 'us-east-1',
+                                  credentials: new AWS.CognitoIdentityCredentials({
+                                                                                  AccountId: '499918285206', // your AWS account ID
+                                                                                  IdentityPoolId: 'us-east-1:a2484271-fa22-4544-882d-fb71de194251'
+                                                                                  })
+                                  });
+                                  
+                                  function parseQueryString(){
+                                      var assoc = {};
+                                      var keyValues = location.search.slice(1).split('&');
+                                      var decode = function(s){
+                                          return decodeURIComponent(s.replace(/\+/g, ' '));
+                                      };
+                                      
+                                      for (var i = 0; i < keyValues.length; ++i) {
+                                          var key = keyValues[i].split('=');
+                                          if (1 < key.length) {
+                                              assoc[decode(key[0])] = decode(key[1]);
+                                          }
+                                      }
+                                      
+                                      return assoc;
+                                  }
+                                  
+                                  var inVal = parseQueryString();
+                                  if (inVal['signin'] == '1') {
+                                      amazon.Login.authorize({scope: "profile"}, function(resp) {
+                                                             if (!resp.error) { // logged in
+                                                             var creds = AWS.config.credentials;
+                                                             creds.params.RoleArn =
+                                                             'arn:aws:iam::499918285206:role/Cognito_sensorAuth_Role';
+                                                             creds.params.Logins = {
+                                                             'www.amazon.com': resp.access_token
+                                                             };
+                                                             
+                                                             // manually expire credentials so next request will fire a refresh()
+                                                             creds.expired = true;
+                                                             }
+                                                             });
+                                                             amazon.Login.retrieveProfile(function(resp) {
+                                                                                          console.log(resp);
+                                                                                          sessionStorage.setItem('customerId', resp.profile.CustomerId);
+                                                                                          });
+                                  }
+                                  
+            };
+        
+        (function(d) {
+         var a = d.createElement('script'); a.type = 'text/javascript';
+         a.async = true; a.id = 'amazon-login-sdk';
+         a.src = 'https://api-cdn.amazon.com/sdk/login1.js';
+         d.getElementById('amazon-root').appendChild(a);
+         })(document);
+         
+         
+            </script>
+        
+        <a href="#" id="LoginWithAmazon">
+            <img border="0" alt="Login with Amazon"
+            src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png"
+            width="156" height="32" />
+        </a>
+        
+        <script type="text/javascript">
+            
+            document.getElementById('LoginWithAmazon').onclick = function() {
+                options = { scope : 'profile' };
+                amazon.Login.authorize(options, 'http://127.0.0.1:9000/?signin=1');
+                return false;
+            };
+        
+            </script>
+        
+        <a href="#" id="Logout">Logout</a>
+        
+        <script type="text/javascript">
+            document.getElementById('Logout').onclick = function() {
+                amazon.Login.logout();
+                
+                // TODO need to clear STS from current session?
+                //AWS.config.credentials.clearCachedId();
+            };
+        </script>
+        
+        <br>
+        <input type="text" id="dateStart"/>
+        <script>
+            document.getElementById('dateStart').value = new Date().toJSON();
+        </script>
+        
+        <button id="Fetch">Fetch records</a>
+        <script type="text/javascript">
+            document.getElementById('Fetch').onclick = function() {
+                var docClient = new AWS.DynamoDB.DocumentClient({region: 'us-east-1'});
+                
+                var params = {
+                    TableName : 'sensor',
+                    Limit : 200,
+                    KeyConditionExpression: 'hashKey = :hkey and rangeKey > :rkey',
+                    ExpressionAttributeValues: {
+                        ':hkey': sessionStorage.getItem('customerId'),
+                        ':rkey': document.getElementById('dateStart').value
+                    }
+                };
+                
+                // TODO the iam policy condition isn't narrowing down by cognito id...
+                docClient.query(params, function(err, data) {
+                               if (err) console.log(err);
+                               else console.log(data);
+                               });
+            };
+        </script>
+        
+    </body>
+</html>
