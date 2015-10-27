@@ -20,9 +20,10 @@
         </style>
     <title>Sensor Web</title>
     <body>
-        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.11.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+        <script src="node_modules/aws-sdk/dist/aws-sdk.min.js"></script>
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="node_modules/d3/d3.min.js"></script>
+        <script src="node_modules/vis/dist/vis.min.js"></script>
         
         <div id="amazon-root"></div>
         
@@ -168,82 +169,130 @@
                   "translate(" + margin.left + "," + margin.top + ")");
                   
                   // Get the data
-                document.getElementById('Fetch').onclick = function() {
-                         var docClient = new AWS.DynamoDB.DocumentClient({region: 'us-east-1'});
-                         
-                         var params = {
-                         TableName : 'sensor',
-                         Limit : 200,
-                         KeyConditionExpression: 'hashKey = :hkey and rangeKey > :rkey',
-                         ExpressionAttributeValues: {
-                         ':hkey': sessionStorage.getItem('customerId'),
-                         ':rkey': document.getElementById('dateStart').value
-                         }
-                         };
-                         
-                         // TODO the iam policy condition isn't narrowing down by cognito id...
-                         docClient.query(params, function(err, rawData) {
-                                         if (err) console.log(err);
-                                         else {
-                                         console.log(rawData);
-                                         var data = [];
-
-                                        rawData.Items.forEach(function(d) {
-                                                      var sensorTime = parseDate(d.rangeKey.split("_")[0]);
-                                                        data.push({
-                                                                    date : sensorTime,
-                                                                    x : d.x,
-                                                                  y : d.y,
-                                                                  z : d.z
-                                                                    });
-                                                      });
-                                         
-                                         // Scale the range of the data
-                                         x.domain(d3.extent(data, function(d) { return d.date; }));
-                                         y.domain([-2.0, +2.0]);
-                                         
-                                         // Add the valueline path.
-                                         svg.append("path")
-                                         .attr("class", "line")
-                                         .style("stroke", "red")
-                                         .attr("d", xval(data));
-                                         // Add the valueline path.
-                                         svg.append("path")
-                                         .attr("class", "line")
-                                         .style("stroke", "green")
-                                         .attr("d", yval(data));
-                                         // Add the valueline path.
-                                         svg.append("path")
-                                         .attr("class", "line")
-                                         .style("stroke", "blue")
-                                         .attr("d", zval(data));
-                                         
-                                         // Add the X Axis
-                                         svg.append("g")
-                                         .attr("class", "x axis")
-                                         .attr("transform", "translate(0," + height + ")")
-                                         .call(xAxis);
-                                         
-                                         // Add the Y Axis
-                                         svg.append("g")
-                                         .attr("class", "y axis")
-                                         .call(yAxis);
-                                         
-                                         }
-                                         });
-                         
-                         //var trHTML = '';
-                         //$.each(data.Items, function (i, item) {
-                          //      trHTML += '<tr><td>' + item.rangeKey + '</td><td>' + item.x + '</td><td>' + item.y + '</td><td>' + item.z + '</td></tr>';
-                           //     });
-                         //$('#records_table').append(trHTML);
-                         //}
-                         //});
-                         
-                         
-                         
-                         };
+                  document.getElementById('Fetch').onclick = function() {
+                      var docClient = new AWS.DynamoDB.DocumentClient({region: 'us-east-1'});
+                      
+                      var params = {
+                          TableName : 'sensor',
+                          Limit : 200,
+                          KeyConditionExpression: 'hashKey = :hkey and rangeKey > :rkey',
+                          ExpressionAttributeValues: {
+                              ':hkey': sessionStorage.getItem('customerId'),
+                              ':rkey': document.getElementById('dateStart').value
+                          }
+                      };
+                      
+                      // create some shortcuts to math functions
+                      var sqrt = Math.sqrt;
+                      var pow = Math.pow;
+                      
+                      // TODO the iam policy condition isn't narrowing down by cognito id...
+                      docClient.query(params, function(err, rawData) {
+                                      if (err) console.log(err);
+                                      else {
+                                      console.log(rawData);
+                                      var data = [];
+                                      var visData = new vis.DataSet();
+                                      var firstTime = null;
+                                      
+                                      rawData.Items.forEach(function(d) {
+                                                            var sensorTime = parseDate(d.rangeKey.split("_")[0]);
+                                                            if (!firstTime) {
+                                                            firstTime = sensorTime;
+                                                            }
+                                                            data.push({
+                                                                      date : sensorTime,
+                                                                      x : d.x,
+                                                                      y : d.y,
+                                                                      z : d.z
+                                                                      });
+                                                            
+                                                            var vx = pow(d.x, 2);
+                                                            var vy = pow(d.y, 2);
+                                                            var vz = pow(d.z, 2);
+                                                            var dist = (sensorTime - firstTime) / 1000.0;
+                                                            
+                                                            visData.add({x:vx,y:vy,z:vz,style:dist});
+                                                            
+                                                            });
+                                      
+                                      // Scale the range of the data
+                                      x.domain(d3.extent(data, function(d) { return d.date; }));
+                                      y.domain([-2.0, +2.0]);
+                                      
+                                      // Add the valueline path.
+                                      svg.append("path")
+                                      .attr("class", "line")
+                                      .style("stroke", "red")
+                                      .attr("d", xval(data));
+                                      // Add the valueline path.
+                                      svg.append("path")
+                                      .attr("class", "line")
+                                      .style("stroke", "green")
+                                      .attr("d", yval(data));
+                                      // Add the valueline path.
+                                      svg.append("path")
+                                      .attr("class", "line")
+                                      .style("stroke", "blue")
+                                      .attr("d", zval(data));
+                                      
+                                      // Add the X Axis
+                                      svg.append("g")
+                                      .attr("class", "x axis")
+                                      .attr("transform", "translate(0," + height + ")")
+                                      .call(xAxis);
+                                      
+                                      // Add the Y Axis
+                                      svg.append("g")
+                                      .attr("class", "y axis")
+                                      .call(yAxis);
+                                      
+                                      // specify options
+                                      var voptions = {
+                                      width:  '800px',
+                                      height: '800px',
+                                      style: 'dot-color',
+                                      showPerspective: true,
+                                      showGrid: true,
+                                      keepAspectRatio: true,
+                                      verticalRatio: 1.0,
+                                      xMin: -2.0,
+                                      xMax: 2.0,
+                                      yMin: -2.0,
+                                      yMax: 2.0,
+                                      zMin: -2.0,
+                                      zMax: 2.0,
+                                      showShadow: true,
+                                      legendLabel: 'time',
+                                      cameraPosition: {
+                                      horizontal: -0.35,
+                                      vertical: 0.22,
+                                      distance: 1.8
+                                      }
+                                      };
+                                      
+                                      // create our graph
+                                      var container = document.getElementById('mygraph');
+                                      graph = new vis.Graph3d(container, visData, voptions);
+                                      
+                                      }
+                                      });
+                                      
+                                      //var trHTML = '';
+                                      //$.each(data.Items, function (i, item) {
+                                      //      trHTML += '<tr><td>' + item.rangeKey + '</td><td>' + item.x + '</td><td>' + item.y + '</td><td>' + item.z + '</td></tr>';
+                                      //     });
+                                      //$('#records_table').append(trHTML);
+                                      //}
+                                      //});
+                                      
+                                      
+                                      
+                  };
+        
             </script>
+        <br/>
+        <div id="mygraph"></div>
         
     </body>
 </html>
