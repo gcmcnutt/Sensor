@@ -207,12 +207,9 @@
                                                                       z : d.z
                                                                       });
                                                             
-                                                            var vx = pow(d.x, 2);
-                                                            var vy = pow(d.y, 2);
-                                                            var vz = pow(d.z, 2);
                                                             var dist = (sensorTime - firstTime) / 1000.0;
                                                             
-                                                            visData.add({x:vx,y:vy,z:vz,style:dist});
+                                                            visData.add({x:d.x,y:d.y,z:d.z,style:dist});
                                                             
                                                             });
                                       
