@@ -91,35 +91,40 @@
          
             </script>
         
-        <a href="#" id="LoginWithAmazon">
-            <img border="0" alt="Login with Amazon"
-            src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png"
-            width="156" height="32" />
-        </a>
-        
+<!--        <a href="#" id="LoginWithAmazon">-->
+<!--            <img border="0" alt="Login with Amazon"-->
+<!--            src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png"-->
+<!--            width="156" height="32" />-->
+<!--        </a>-->
+<!--        -->
+<!--        <script>-->
+<!--            -->
+<!--            document.getElementById('LoginWithAmazon').onclick = function() {-->
+<!--                options = { scope : 'profile' };-->
+<!--                amazon.Login.authorize(options, 'http://127.0.0.1:9000/?signin=1');-->
+<!--                return false;-->
+<!--            };-->
+<!--        -->
+<!--            </script>-->
+<!--        -->
+<!--        <button id="Amazon Logout">Logout</button>-->
+<!--        -->
+<!--        <script>-->
+<!--            document.getElementById('Amazon Logout').onclick = function() {-->
+<!--                amazon.Login.logout();-->
+<!--                -->
+<!--                // TODO need to clear STS from current session?-->
+<!--                //AWS.config.credentials.clearCachedId();-->
+<!--            };-->
+<!--        </script>-->
+<!--        <button id="testUser">Or, manually set test user</button>-->
         <script>
-            
-            document.getElementById('LoginWithAmazon').onclick = function() {
-                options = { scope : 'profile' };
-                amazon.Login.authorize(options, 'http://127.0.0.1:9000/?signin=1');
-                return false;
-            };
-        
-            </script>
-        
-        <a href="#" id="Logout">Logout</a>
-        
-        <script>
-            document.getElementById('Logout').onclick = function() {
-                amazon.Login.logout();
-                
-                // TODO need to clear STS from current session?
-                //AWS.config.credentials.clearCachedId();
-            };
+<!--            document.getElementById('testUser').onclick = function() {-->
+                sessionStorage.setItem('customerId', 'amzn1.account.AHABI5JBY772UCPJ4UGYMGWKJJBA');
+<!--            }-->
         </script>
         
-        <br/>
-        <input type="text" id="dateStart"/>
+        <label>Start date:</label><input type="text" id="dateStart"/>
         <script>
             document.getElementById('dateStart').value = "2015-10-26T05:24:43"; //new Date().toJSON();
             </script>
@@ -174,7 +179,7 @@
                       
                       var params = {
                           TableName : 'sensor',
-                          Limit : 200,
+                          Limit : 400,
                           KeyConditionExpression: 'hashKey = :hkey and rangeKey > :rkey',
                           ExpressionAttributeValues: {
                               ':hkey': sessionStorage.getItem('customerId'),
@@ -190,6 +195,7 @@
                       docClient.query(params, function(err, rawData) {
                                       if (err) console.log(err);
                                       else {
+                                      svg.selectAll("*").remove();
                                       console.log(rawData);
                                       var data = [];
                                       var visData = new vis.DataSet();
@@ -247,7 +253,7 @@
                                       // specify options
                                       var voptions = {
                                       width:  '800px',
-                                      height: '800px',
+                                      height: '600px',
                                       style: 'dot-color',
                                       showPerspective: true,
                                       showGrid: true,
