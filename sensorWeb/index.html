@@ -132,6 +132,8 @@
         <button id="Fetch">Fetch records</button>
         
         <br/>
+        You can also try: 2015-10-27T16:42:43
+        <br/>
         <script>
             
             // Set the dimensions of the canvas / graph
@@ -250,6 +252,19 @@
                                       .attr("class", "y axis")
                                       .call(yAxis);
                                       
+                                      svg.append("text")
+                                      .attr("transform", "rotate(-90)")
+                                      .attr("y", 0 - margin.left)
+                                      .attr("x", 0 - (height / 2))
+                                      .attr("dy", "1em")
+                                      .style("text-anchor", "middle")
+                                      .text("Acceleration in Gs (Red=x, Green=y, Blue=z)");
+                                      
+                                      svg.append("text")
+                                      .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom) + ")")
+                                      .style("text-anchor", "middle")
+                                      .text("Event time");
+
                                       // specify options
                                       var voptions = {
                                       width:  '800px',
